@@ -1,0 +1,43 @@
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  width: 100%;
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.photo {
+  width: 125px;
+  height: 175px;
+  object-fit: cover;
+  border-radius: 3px;
+  margin-right: 1rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.statsRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.statBox {
+  padding: 0.25rem 0.75rem;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
