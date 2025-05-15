@@ -1,8 +1,10 @@
 import React from 'react';
 import { bio } from '../data/players';
-import { Card, CardContent, Typography, Avatar } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import styles from './styles/BigBoard.module.css';
 import mavsLogo from '../assets/mavs-logo.png';
+import defaultProfile from '../assets/default-profile.png';
 
 export default function BigBoard() {
   return (
@@ -16,34 +18,54 @@ export default function BigBoard() {
         </div>
       </div>
 
-      {/* Main layout */}
+      {/* Main Layout */}
       <div className={styles.content}>
+        {/* Filter Panel */}
         <div className={styles.sidebar}>
-          <p>[Filter Panel Placeholder]</p>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Filters
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                [Filter Panel Placeholder]
+              </Typography>
+            </CardContent>
+          </Card>
         </div>
 
+        {/* Player Cards */}
         <div className={styles.cardContainer}>
           {bio.map((player, index) => (
-            <Card key={player.playerId} className={styles.card}>
-              <CardContent className={styles.cardContent}>
-                <Avatar
-                  src={player.photoUrl}
-                  alt={player.name}
-                  className={styles.avatar}
-                />
-                <div className={styles.info}>
-                  <Typography variant="h6">
-                    {index + 1}. {player.name}
-                  </Typography>
-                  <Typography variant="body2">
-                    {player.currentTeam} ({player.league})
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Avg Rank: TBD
-                  </Typography>
-                </div>
-              </CardContent>
-            </Card>
+            <Link to={`/player/${player.playerId}`} className={styles.cardLink}>
+              <Card key={player.playerId} className={styles.card}>
+                <CardContent className={styles.cardContent}>
+                  <img
+                    src={player.photoUrl || defaultProfile}
+                    alt={player.name}
+                    className={styles.photo}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = defaultProfile;
+                    }}
+                  />
+                  <div className={styles.info}>
+                    <Typography variant="h6">
+                      {player.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {player.currentTeam}, {player.league}
+                    </Typography>
+                    <div className={styles.statsRow}>
+                      <div className={styles.statBox}>PTS</div>
+                      <div className={styles.statBox}>REB</div>
+                      <div className={styles.statBox}>AST</div>
+                      <div className={styles.statBox}>BLK</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>
