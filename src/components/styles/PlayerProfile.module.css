@@ -1,0 +1,54 @@
+.page {
+  background-color: #f4f6f8;
+  min-height: 100vh;
+}
+
+.backButton {
+  cursor: pointer;
+  color: #113259;
+  padding: 1rem 2rem;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+}
+
+.playerImage {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.scoutButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  background-color: #113259;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.rightColumn {
+  flex: 1;
+}
+
+.statsPlaceholder {
+  margin-top: 2rem;
+  background-color: #e0e0e0;
+  height: 150px;
+  border-radius: 8px;
+  padding: 1rem;
+  color: #555;
+}

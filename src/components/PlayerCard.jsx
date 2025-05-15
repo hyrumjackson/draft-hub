@@ -19,7 +19,7 @@ export default function PlayerCard({ player, index }) {
             }}
           />
           <div className={styles.info}>
-            <Typography variant="h6">{index + 1}. {player.name}</Typography>
+            <Typography variant="h6">{player.name}</Typography>
             <Typography variant="body2" color="text.secondary">
               {player.currentTeam}, {player.league}
             </Typography>
