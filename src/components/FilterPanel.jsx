@@ -5,14 +5,35 @@ import {
   Typography,
   ButtonGroup,
   Button,
-  RadioGroup,
-  FormControlLabel,
-  Radio
+  Tabs,
+  Tab,
+  Select,
+  MenuItem
 } from '@mui/material';
 import styles from './styles/FilterPanel.module.css';
 
-export default function FilterPanel({ statMode, setStatMode, sortBy, setSortBy }) {
+export default function FilterPanel({
+  statMode,
+  setStatMode,
+  sortByScout,
+  setSortByScout,
+  sortByStat,
+  setSortByStat
+}) {
   const statModes = ['Per Game', 'Per 36', 'Totals'];
+
+  const [sortMode, setSortMode] = React.useState('scout');
+
+  const handleTabChange = (event, newValue) => {
+    setSortMode(newValue);
+    if (newValue === 'scout') {
+      setSortByStat(null);
+      setSortByScout(sortByScout || 'Average');
+    } else {
+      setSortByScout(null);
+      setSortByStat(sortByStat || 'PTS');
+    }
+  };
 
   return (
     <Card>
@@ -20,7 +41,6 @@ export default function FilterPanel({ statMode, setStatMode, sortBy, setSortBy }
         <Typography variant="body2" gutterBottom className={styles.filterSection}>
           Stat Mode
         </Typography>
-
         <ButtonGroup fullWidth variant="outlined">
           {statModes.map((mode) => (
             <Button
@@ -33,25 +53,51 @@ export default function FilterPanel({ statMode, setStatMode, sortBy, setSortBy }
           ))}
         </ButtonGroup>
 
-        <br />
-        <br />
-
-        <Typography variant="body2" gutterBottom className={styles.filterSection}>
+        <Typography variant="body2" gutterBottom sx={{ marginTop: 2 }}>
           Sort By
         </Typography>
 
-        <RadioGroup
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className={styles.radioGroup}
+        <Tabs
+          value={sortMode}
+          onChange={handleTabChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
         >
-          <FormControlLabel value="Average" control={<Radio />} label="Average" classes={{ label: styles.radioLabel }} />
-          <FormControlLabel value="ESPN Rank" control={<Radio />} label="ESPN" classes={{ label: styles.radioLabel }} />
-          <FormControlLabel value="Sam Vecenie Rank" control={<Radio />} label="Sam Vecenie" classes={{ label: styles.radioLabel }} />
-          <FormControlLabel value="Kevin O'Connor Rank" control={<Radio />} label="Kevin O'Connor" classes={{ label: styles.radioLabel }} />
-          <FormControlLabel value="Kyle Boone Rank" control={<Radio />} label="Kyle Boone" classes={{ label: styles.radioLabel }} />
-          <FormControlLabel value="Gary Parrish Rank" control={<Radio />} label="Gary Parrish" classes={{ label: styles.radioLabel }} />
-        </RadioGroup>
+          <Tab label="Scout" value="scout" />
+          <Tab label="Stat" value="stat" />
+        </Tabs>
+
+        {sortMode === 'scout' && (
+          <Select
+            fullWidth
+            value={sortByScout || 'Average'}
+            onChange={(e) => setSortByScout(e.target.value)}
+            sx={{ marginTop: 1 }}
+          >
+            <MenuItem value="Average">Average</MenuItem>
+            <MenuItem value="ESPN Rank">ESPN</MenuItem>
+            <MenuItem value="Sam Vecenie Rank">Sam Vecenie</MenuItem>
+            <MenuItem value="Kevin O'Connor Rank">Kevin O'Connor</MenuItem>
+            <MenuItem value="Kyle Boone Rank">Kyle Boone</MenuItem>
+            <MenuItem value="Gary Parrish Rank">Gary Parrish</MenuItem>
+          </Select>
+        )}
+
+        {sortMode === 'stat' && (
+          <Select
+            fullWidth
+            value={sortByStat || 'PTS'}
+            onChange={(e) => setSortByStat(e.target.value)}
+            sx={{ marginTop: 1 }}
+          >
+            <MenuItem value="PTS">Points</MenuItem>
+            <MenuItem value="TRB">Rebounds</MenuItem>
+            <MenuItem value="AST">Assists</MenuItem>
+            <MenuItem value="BLK">Blocks</MenuItem>
+            <MenuItem value="STL">Steals</MenuItem>
+          </Select>
+        )}
       </CardContent>
     </Card>
   );

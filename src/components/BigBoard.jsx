@@ -7,7 +7,8 @@ import PlayerCard from '../components/PlayerCard';
 
 export default function BigBoard() {
   const [statMode, setStatMode] = useState('Per Game');
-  const [sortBy, setSortBy] = useState('Average');
+  const [sortByScout, setSortByScout] = useState('Average');
+  const [sortByStat, setSortByStat] = useState(null);
 
   const players = bio.map((player) => {
     const rankingEntry = scoutRankings.find(
@@ -46,16 +47,39 @@ export default function BigBoard() {
     };
   });
 
-  const sortedPlayers = [...players].sort((a, b) => {
-    if (sortBy === 'Average') {
-      if (a.avgRank === b.avgRank) return a.espnRank - b.espnRank;
-      return a.avgRank - b.avgRank;
-    } else {
-      const aRank = a.rankings?.[sortBy] ?? Infinity;
-      const bRank = b.rankings?.[sortBy] ?? Infinity;
-      return aRank - bRank;
+  function getSortableStat(stats = {}, key, mode) {
+    const value = stats[key];
+    const gp = stats.GP || 1;
+    const mp = stats.MP || 1;
+
+    if (value == null) return -Infinity;
+
+    switch (mode) {
+      case 'Totals': return value * gp;
+      case 'Per 36': return mp > 0 ? (value / mp) * 36 : 0;
+      case 'Per Game':
+      default: return value;
     }
-  });  
+  }
+
+  const sortedPlayers = [...players].sort((a, b) => {
+    if (sortByScout) {
+      if (sortByScout === 'Average') {
+        if (a.avgRank === b.avgRank) return a.espnRank - b.espnRank;
+        return a.avgRank - b.avgRank;
+      } else {
+        const aRank = a.rankings?.[sortByScout] ?? Infinity;
+        const bRank = b.rankings?.[sortByScout] ?? Infinity;
+        return aRank - bRank;
+      }
+    } else if (sortByStat) {
+      const aStat = getSortableStat(a.stats, sortByStat, statMode);
+      const bStat = getSortableStat(b.stats, sortByStat, statMode);
+      return bStat - aStat; // Descending order (high to low)
+    } else {
+      return 0;
+    }
+  });
 
   return (
     <div className={styles.page}>
@@ -66,8 +90,10 @@ export default function BigBoard() {
           <FilterPanel
             statMode={statMode}
             setStatMode={setStatMode}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
+            sortByScout={sortByScout}
+            setSortByScout={setSortByScout}
+            sortByStat={sortByStat}
+            setSortByStat={setSortByStat}
           />
         </div>
 
