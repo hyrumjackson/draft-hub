@@ -6,6 +6,7 @@ import {
   gameLogs,
   seasonLogs,
   scoutingReports,
+  scoutRankings
 } from '../data/players';
 
 import Header from './Header';
@@ -13,6 +14,7 @@ import StatCard from './StatCard';
 import BioMeasurementsCard from './BioMeasurementsCard';
 import GameHistoryCard from './GameHistoryCard';
 import SeasonAveragesCard from './SeasonAveragesCard';
+import ScoutRankings from './ScoutRankings';
 import ScoutingReportsCard from './ScoutingReportsCard';
 
 import styles from './styles/PlayerProfile.module.css';
@@ -25,7 +27,8 @@ export default function PlayerProfile() {
   const playerMeasurements = measurements.find((m) => m.playerId.toString() === id);
   const playerGames = gameLogs.filter((g) => g.playerId.toString() === id);
   const playerSeasonStats = seasonLogs.filter((s) => s.playerId.toString() === id);
-  const playerReports = scoutingReports.filter((r) => r.playerId.toString() === id);
+  const playerRankings = scoutRankings.filter((r) => r.playerId.toString() === id);
+  const playerReports = scoutingReports.filter((e) => e.playerId.toString() === id);
 
   if (!player) {
     return <div style={{ padding: '2rem' }}>Player not found.</div>;
@@ -60,7 +63,6 @@ export default function PlayerProfile() {
           <p><strong>Team:</strong> {player.currentTeam}</p>
           <p><strong>Age:</strong> {player.age || 'N/A'}</p>
           <p><strong>Nationality:</strong> {player.nationality}</p>
-          <p><strong>And you're still missing a table in json, make sure to analyze that and add those</strong></p>
           <br />
 
           <StatCard title="Bio & Measurements">
@@ -75,6 +77,10 @@ export default function PlayerProfile() {
             <SeasonAveragesCard seasons={playerSeasonStats} />
           </StatCard>
 
+          <StatCard title="Scout Rankings">
+            <ScoutRankings data={playerRankings} />
+          </StatCard>
+          
           <StatCard title="Scouting Reports">
             <ScoutingReportsCard reports={playerReports} />
           </StatCard>
