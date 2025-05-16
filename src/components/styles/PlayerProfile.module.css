@@ -44,6 +44,13 @@
   flex: 1;
 }
 
+.nationalityFlag {
+  width: 24px;
+  height: 18px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
 .statsSection {
   margin-top: 2rem;
   background-color: #ffffff;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   bio,
@@ -15,9 +15,10 @@ import GameHistoryCard from './GameHistoryCard';
 import SeasonAveragesCard from './SeasonAveragesCard';
 import ScoutRankings from './ScoutRankings';
 import ScoutingReportsCard from './ScoutingReportsCard';
-
 import styles from './styles/PlayerProfile.module.css';
 import defaultProfile from '../assets/default-profile.png';
+import Flag from 'react-world-flags';
+import { getCountryCode } from '../utils/nationalityToCode';
 
 export default function PlayerProfile() {
   const { id } = useParams();
@@ -28,6 +29,10 @@ export default function PlayerProfile() {
   const playerSeasonStats = seasonLogs.filter((s) => s.playerId.toString() === id);
   const playerRankings = scoutRankings.filter((r) => r.playerId.toString() === id);
   const playerReports = scoutingReports.filter((e) => e.playerId.toString() === id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!player) {
     return <div style={{ padding: '2rem' }}>Player not found.</div>;
@@ -72,7 +77,13 @@ export default function PlayerProfile() {
           <h2>{player.name}</h2>
           <p><strong>Team:</strong> {player.currentTeam}</p>
           <p><strong>Age:</strong> {calculateAge(player.birthDate) || 'N/A'}</p>
-          <p><strong>Nationality:</strong> {player.nationality}</p>
+          <p>
+            <strong>Nationality:</strong> {player.nationality}
+            <Flag
+              code={getCountryCode(player.nationality)}
+              className={styles.nationalityFlag}
+            />
+          </p>
           <br />
 
           <StatCard title="Bio & Measurements">
