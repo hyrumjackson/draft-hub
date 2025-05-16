@@ -15,20 +15,28 @@ export default function ScoutRanks({ data }) {
   const values = scoutEntries.map(([_, rank]) => rank).filter((r) => r !== null);
   const min = Math.min(...values);
   const max = Math.max(...values);
-  const isAllEqual = values.every((val) => val === values[0]);
+  const isAllEqual = values.length > 0 && values.every((val) => val === values[0]);
 
   return (
     <div className={styles.twoColumnGrid}>
       {scoutEntries.map(([scout, rank]) => {
         let indicator = null;
-        if (!isAllEqual) {
-          if (rank === min) indicator = <span className={styles.greenDot} />;
-          else if (rank === max) indicator = <span className={styles.redDot} />;
+        let display = '';
+
+        if (rank === null || rank === undefined) {
+          display = 'TBD';
+          indicator = <span className={styles.grayDot} />;
+        } else {
+          display = `#${rank}`;
+          if (!isAllEqual) {
+            if (rank === min) indicator = <span className={styles.greenDot} />;
+            else if (rank === max) indicator = <span className={styles.redDot} />;
+          }
         }
 
         return (
           <div key={scout} className={styles.inlineFieldRow}>
-            <strong>{scout.replace(' Rank', '')}:</strong> #{rank} {indicator}
+            <strong>{scout.replace(' Rank', '')}:</strong> {display} {indicator}
           </div>
         );
       })}

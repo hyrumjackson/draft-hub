@@ -34,6 +34,17 @@ export default function PlayerProfile() {
     return <div style={{ padding: '2rem' }}>Player not found.</div>;
   }
 
+  function calculateAge(birthDateStr) {
+    if (!birthDateStr) return null;
+  
+    const birthDate = new Date(birthDateStr);
+    const now = new Date();
+    const ageInMs = now - birthDate;
+    const ageInYears = ageInMs / (1000 * 60 * 60 * 24 * 365.25);
+  
+    return ageInYears.toFixed(1);
+  }  
+
   return (
     <div className={styles.page}>
       <Header title="2025 NBA DRAFT HUB" subtitle="Player Profile" />
@@ -61,7 +72,7 @@ export default function PlayerProfile() {
         <div className={styles.rightColumn}>
           <h2>{player.name}</h2>
           <p><strong>Team:</strong> {player.currentTeam}</p>
-          <p><strong>Age:</strong> {player.age || 'N/A'}</p>
+          <p><strong>Age:</strong> {calculateAge(player.birthDate) || 'N/A'}</p>
           <p><strong>Nationality:</strong> {player.nationality}</p>
           <br />
 
