@@ -21,6 +21,7 @@ import defaultProfile from '../assets/default-profile.png';
 import Flag from 'react-world-flags';
 import { getCountryCode } from '../utils/nationalityToCode';
 import { playerImageOverrides } from '../utils/playerPhotos';
+import { teamLogos } from '../utils/teamLogos';
 
 export default function PlayerProfile() {
   const { id } = useParams();
@@ -93,7 +94,17 @@ export default function PlayerProfile() {
         {/* Right Column: Info Cards */}
         <div className={styles.rightColumn}>
           <h2>{player.name}</h2>
-          <p><strong>Team:</strong> {player.currentTeam}</p>
+          <p className={styles.inlineIconText}>
+            <strong>Team:</strong>{' '}
+            {player.currentTeam}
+            {teamLogos[player.currentTeam] && (
+              <img
+                src={teamLogos[player.currentTeam]}
+                alt={`${player.currentTeam} logo`}
+                className={styles.inlineIcon}
+              />
+            )}
+          </p>
           <p><strong>Age:</strong> {calculateAge(player.birthDate) || 'N/A'}</p>
           <p>
             <strong>Nationality:</strong> {player.nationality}

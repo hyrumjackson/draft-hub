@@ -44,6 +44,18 @@
   flex: 1;
 }
 
+.inlineIconText {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inlineIcon {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
+}
+
 .nationalityFlag {
   width: 24px;
   height: 18px;
