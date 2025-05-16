@@ -20,6 +20,7 @@ import styles from './styles/PlayerProfile.module.css';
 import defaultProfile from '../assets/default-profile.png';
 import Flag from 'react-world-flags';
 import { getCountryCode } from '../utils/nationalityToCode';
+import { playerImageOverrides } from '../utils/playerPhotos';
 
 export default function PlayerProfile() {
   const { id } = useParams();
@@ -69,7 +70,11 @@ export default function PlayerProfile() {
         {/* Left Column: Image + Button */}
         <div className={styles.leftColumn}>
           <img
-            src={player.photoUrl || defaultProfile}
+            src={
+              playerImageOverrides[player.playerId] 
+              || player.photoUrl
+              || defaultProfile
+            }
             alt={player.name}
             className={styles.playerImage}
             onError={(e) => {

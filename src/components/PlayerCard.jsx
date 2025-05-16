@@ -3,6 +3,7 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import defaultProfile from '../assets/default-profile.png';
 import styles from './styles/PlayerCard.module.css';
+import { playerImageOverrides } from '../utils/playerPhotos';
 
 export default function PlayerCard({ player, index, stats, statMode }) {
   function getStat(statKey) {
@@ -32,7 +33,11 @@ export default function PlayerCard({ player, index, stats, statMode }) {
           {/* Left Section */}
           <div className={styles.leftSide}>
             <img
-              src={player.photoUrl || defaultProfile}
+              src={
+                playerImageOverrides[player.playerId] 
+                || player.photoUrl
+                || defaultProfile
+              }
               alt={player.name}
               className={styles.photo}
               onError={(e) => {
