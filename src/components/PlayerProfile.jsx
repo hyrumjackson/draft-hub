@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   bio,
@@ -15,6 +15,7 @@ import GameHistoryCard from './GameHistoryCard';
 import SeasonAveragesCard from './SeasonAveragesCard';
 import ScoutRankings from './ScoutRankings';
 import ScoutingReportsCard from './ScoutingReportsCard';
+import ScoutingReportModal from './ScoutingReportModal';
 import styles from './styles/PlayerProfile.module.css';
 import defaultProfile from '../assets/default-profile.png';
 import Flag from 'react-world-flags';
@@ -23,6 +24,9 @@ import { getCountryCode } from '../utils/nationalityToCode';
 export default function PlayerProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [customReports, setCustomReports] = useState([]);
+
   const player = bio.find((p) => p.playerId.toString() === id);
   const playerMeasurements = measurements.find((m) => m.playerId.toString() === id);
   const playerGames = gameLogs.filter((g) => g.playerId.toString() === id);
@@ -40,13 +44,17 @@ export default function PlayerProfile() {
 
   function calculateAge(birthDateStr) {
     if (!birthDateStr) return null;
-  
+
     const birthDate = new Date(birthDateStr);
     const now = new Date();
     const ageInMs = now - birthDate;
     const ageInYears = ageInMs / (1000 * 60 * 60 * 24 * 365.25);
-  
+
     return ageInYears.toFixed(1);
+  }
+
+  function handleAddReport(reportObj) {
+    setCustomReports([...customReports, reportObj]);
   }  
 
   return (
@@ -69,7 +77,12 @@ export default function PlayerProfile() {
               e.target.src = defaultProfile;
             }}
           />
-          <button className={styles.scoutButton}>+ Create Scouting Report</button>
+          <button
+            className={styles.scoutButton}
+            onClick={() => setModalOpen(true)}
+          >
+            + Create Scouting Report
+          </button>
         </div>
 
         {/* Right Column: Info Cards */}
@@ -101,12 +114,19 @@ export default function PlayerProfile() {
           <StatCard title="Scout Rankings">
             <ScoutRankings data={playerRankings} />
           </StatCard>
-          
+
           <StatCard title="Scouting Reports">
-            <ScoutingReportsCard reports={playerReports} />
+            <ScoutingReportsCard reports={[...playerReports, ...customReports]} />
           </StatCard>
         </div>
       </div>
+
+      <ScoutingReportModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleAddReport}
+        playerId={player.playerId}
+      />
     </div>
   );
 }
