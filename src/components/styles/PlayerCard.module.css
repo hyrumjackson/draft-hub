@@ -5,12 +5,41 @@
 
 .card {
   width: 100%;
+  position: relative;
+  overflow: visible !important;
 }
 
 .cardContent {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   padding: 1rem;
+}
+
+.cardContent {
+  display: flex;
+  align-items: stretch;
+  padding: 1rem;
+  gap: 1.25rem;
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.rankingBox {
+  font-size: 0.875rem;
+  color: #333;
+  line-height: 1.4;
 }
 
 .photo {
@@ -26,6 +55,8 @@
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
+  border-right: 1px solid #ccc;
+  padding-right: 1rem;
 }
 
 .statsRow {
@@ -40,4 +71,72 @@
   border-radius: 6px;
   font-weight: 600;
   font-size: 0.875rem;
+  text-align: center;
+}
+
+.rankBadge {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background-color: #113259;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+.avgRank {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+.scoutStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.scoutDot {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+}
+
+.scoutText {
+  font-size: 0.75rem;
+  color: #444;
+  white-space: nowrap;
+}
+
+.greenDot, .redDot, .grayDot, .neutralDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.greenDot {
+  background-color: #2ecc71;
+}
+.redDot {
+  background-color: #e74c3c;
+}
+.grayDot {
+  background-color: #bdc3c7;
+}
+.neutralDot {
+  background-color: #999;
+}
+
+.scoutLabel {
+  font-size: 0.75rem;
+  color: #444;
 }
