@@ -7,6 +7,7 @@ import PlayerCard from '../components/PlayerCard';
 
 export default function BigBoard() {
   const [statMode, setStatMode] = useState('Per Game');
+  const [sortBy, setSortBy] = useState('Average');
 
   const players = bio.map((player) => {
     const rankingEntry = scoutRankings.find(
@@ -45,12 +46,16 @@ export default function BigBoard() {
     };
   });
 
-  const sortedPlayers = players.sort((a, b) => {
-    if (a.avgRank === b.avgRank) {
-      return a.espnRank - b.espnRank;
+  const sortedPlayers = [...players].sort((a, b) => {
+    if (sortBy === 'Average') {
+      if (a.avgRank === b.avgRank) return a.espnRank - b.espnRank;
+      return a.avgRank - b.avgRank;
+    } else {
+      const aRank = a.rankings?.[sortBy] ?? Infinity;
+      const bRank = b.rankings?.[sortBy] ?? Infinity;
+      return aRank - bRank;
     }
-    return a.avgRank - b.avgRank;
-  });
+  });  
 
   return (
     <div className={styles.page}>
@@ -61,6 +66,8 @@ export default function BigBoard() {
           <FilterPanel
             statMode={statMode}
             setStatMode={setStatMode}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
           />
         </div>
 
