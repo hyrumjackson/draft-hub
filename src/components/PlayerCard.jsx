@@ -4,7 +4,26 @@ import { Link } from 'react-router-dom';
 import defaultProfile from '../assets/default-profile.png';
 import styles from './styles/PlayerCard.module.css';
 
-export default function PlayerCard({ player, index, stats }) {
+export default function PlayerCard({ player, index, stats, statMode }) {
+  function getStat(statKey) {
+    if (!stats || !stats[statKey]) return '–';
+  
+    const value = stats[statKey];
+    const gp = stats.GP || 1;
+    const mp = stats.MP || 1;
+  
+    switch (statMode) {
+      case 'Per Game':
+        return value.toFixed(1);
+      case 'Totals':
+        return (value * gp).toFixed(0);
+      case 'Per 36':
+        return mp > 0 ? ((value / mp) * 36).toFixed(1) : '–';
+      default:
+        return value.toFixed(1);
+    }
+  }  
+
   return (
     <Link to={`/player/${player.playerId}`} className={styles.cardLink}>
       <Card className={styles.card}>
@@ -27,11 +46,11 @@ export default function PlayerCard({ player, index, stats }) {
                 {player.currentTeam}, {player.leagueType}
               </Typography>
               <div className={styles.statsRow}>
-                <div className={styles.statBox}><strong>PTS</strong><br />{stats.PTS?.toFixed(1) ?? '–'}</div>
-                <div className={styles.statBox}><strong>REB</strong><br />{stats.TRB?.toFixed(1) ?? '–'}</div>
-                <div className={styles.statBox}><strong>AST</strong><br />{stats.AST?.toFixed(1) ?? '–'}</div>
-                <div className={styles.statBox}><strong>BLK</strong><br />{stats.BLK?.toFixed(1) ?? '–'}</div>
-                <div className={styles.statBox}><strong>STL</strong><br />{stats.STL?.toFixed(1) ?? '–'}</div>
+                <div className={styles.statBox}><strong>PTS</strong><br />{getStat('PTS')}</div>
+                <div className={styles.statBox}><strong>REB</strong><br />{getStat('TRB')}</div>
+                <div className={styles.statBox}><strong>AST</strong><br />{getStat('AST')}</div>
+                <div className={styles.statBox}><strong>BLK</strong><br />{getStat('BLK')}</div>
+                <div className={styles.statBox}><strong>STL</strong><br />{getStat('STL')}</div>
               </div>
             </div>
           </div>
@@ -49,7 +68,7 @@ export default function PlayerCard({ player, index, stats }) {
                     else dotClass = styles.neutralDot;
                   }
 
-                  const scoutAbbrev = scout.replace(' Rank', '').split(' ')[0]; // crude but effective
+                  const scoutAbbrev = scout.replace(' Rank', '').split(' ')[0];
 
                   return (
                     <div key={scout} className={styles.scoutDot}>

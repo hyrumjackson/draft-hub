@@ -4,15 +4,19 @@
 }
 
 .card {
-  width: 100%;
   position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   overflow: visible !important;
 }
 
-.cardContent {
+.cardContainer {
   display: flex;
-  align-items: stretch;
-  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  flex-grow: 1;
 }
 
 .cardContent {

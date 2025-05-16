@@ -1,16 +1,27 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography, ButtonGroup, Button } from '@mui/material';
 
-export default function FilterPanel() {
+export default function FilterPanel({ statMode, setStatMode }) {
+  const statModes = ['Per Game', 'Per 36', 'Totals'];
+
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Filters
+        <Typography variant="body2" gutterBottom>
+          Stat Mode
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          [Filter Panel Placeholder]
-        </Typography>
+
+        <ButtonGroup fullWidth variant="outlined">
+          {statModes.map((mode) => (
+            <Button
+              key={mode}
+              variant={statMode === mode ? 'contained' : 'outlined'}
+              onClick={() => setStatMode(mode)}
+            >
+              {mode}
+            </Button>
+          ))}
+        </ButtonGroup>
       </CardContent>
     </Card>
   );

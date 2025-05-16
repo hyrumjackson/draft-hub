@@ -8,7 +8,6 @@ import {
   scoutingReports,
   scoutRankings
 } from '../data/players';
-
 import Header from './Header';
 import StatCard from './StatCard';
 import BioMeasurementsCard from './BioMeasurementsCard';
