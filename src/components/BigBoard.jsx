@@ -75,11 +75,21 @@ export default function BigBoard() {
     } else if (sortByStat) {
       const aStat = getSortableStat(a.stats, sortByStat, statMode);
       const bStat = getSortableStat(b.stats, sortByStat, statMode);
-      return bStat - aStat; // Descending order (high to low)
+      return bStat - aStat;
     } else {
       return 0;
     }
   });
+
+  let rankedPlayers = [];
+  let unrankedPlayers = [];
+
+  if (sortByScout && sortByScout !== 'Average') {
+    rankedPlayers = sortedPlayers.filter(p => p.rankings?.[sortByScout] != null);
+    unrankedPlayers = sortedPlayers.filter(p => p.rankings?.[sortByScout] == null);
+  } else {
+    rankedPlayers = sortedPlayers;
+  }
 
   return (
     <div className={styles.page}>
@@ -98,13 +108,35 @@ export default function BigBoard() {
         </div>
 
         <div className={styles.cardContainer}>
-          {sortedPlayers.map((player, index) => (
+          {rankedPlayers.map((player, index) => (
             <PlayerCard
               key={player.playerId}
               player={player}
               index={index + 1}
               stats={player.stats}
               statMode={statMode}
+              ranked={true}
+            />
+          ))}
+
+          {sortByScout && sortByScout !== 'Average' && unrankedPlayers.length > 0 && (
+            <div className={styles.notRankedDivider}>
+              <hr className={styles.horizontalLine} />
+              <div className={styles.dividerLabel}>
+                Not Ranked by {sortByScout.replace(' Rank', '')}
+              </div>
+              <hr className={styles.horizontalLine} />
+            </div>
+          )}
+
+          {unrankedPlayers.map((player) => (
+            <PlayerCard
+              key={player.playerId}
+              player={player}
+              index={null}
+              stats={player.stats}
+              statMode={statMode}
+              ranked={false}
             />
           ))}
         </div>

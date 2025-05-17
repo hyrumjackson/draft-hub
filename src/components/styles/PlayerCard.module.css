@@ -144,3 +144,7 @@
   font-size: 0.75rem;
   color: #444;
 }
+
+.grayOut {
+  filter: grayscale(100%) brightness(80%);
+}

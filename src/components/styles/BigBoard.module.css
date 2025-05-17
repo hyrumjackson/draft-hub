@@ -50,3 +50,25 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.notRankedDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+}
+
+.horizontalLine {
+  flex-grow: 1;
+  border: none;
+  border-top: 1px solid #ccc;
+  height: 1px;
+}
+
+.dividerLabel {
+  font-weight: bold;
+  color: #666;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}

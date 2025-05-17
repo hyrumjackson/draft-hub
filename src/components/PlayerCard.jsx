@@ -5,14 +5,14 @@ import defaultProfile from '../assets/default-profile.png';
 import styles from './styles/PlayerCard.module.css';
 import { playerImageOverrides } from '../utils/playerPhotos';
 
-export default function PlayerCard({ player, index, stats, statMode }) {
+export default function PlayerCard({ player, index, stats, statMode, ranked = true }) {
   function getStat(statKey) {
     if (!stats || !stats[statKey]) return '–';
-  
+
     const value = stats[statKey];
     const gp = stats.GP || 1;
     const mp = stats.MP || 1;
-  
+
     switch (statMode) {
       case 'Per Game':
         return value.toFixed(1);
@@ -23,33 +23,36 @@ export default function PlayerCard({ player, index, stats, statMode }) {
       default:
         return value.toFixed(1);
     }
-  }  
+  }
 
   return (
     <Link to={`/player/${player.playerId}`} className={styles.cardLink}>
       <Card className={styles.card}>
-        <div className={styles.rankBadge}>{index}</div>
+        {ranked && <div className={styles.rankBadge}>{index}</div>}
+
         <CardContent className={styles.cardContent}>
           {/* Left Section */}
           <div className={styles.leftSide}>
             <img
               src={
-                playerImageOverrides[player.playerId] 
+                playerImageOverrides[player.playerId]
                 || player.photoUrl
                 || defaultProfile
               }
               alt={player.name}
-              className={styles.photo}
+              className={`${styles.photo} ${!ranked ? styles.grayOut : ''}`}
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = defaultProfile;
               }}
             />
+
             <div className={styles.info}>
               <Typography variant="h6">{player.name}</Typography>
               <Typography variant="body2" color="text.secondary">
                 {player.currentTeam}, {player.leagueType}
               </Typography>
+
               <div className={styles.statsRow}>
                 <div className={styles.statBox}><strong>PTS</strong><br />{getStat('PTS')}</div>
                 <div className={styles.statBox}><strong>REB</strong><br />{getStat('TRB')}</div>
@@ -62,8 +65,11 @@ export default function PlayerCard({ player, index, stats, statMode }) {
 
           {/* Right Section */}
           <div className={styles.rightSide}>
-            <div className={styles.avgRank}>Avg. Rank: {player.avgRank?.toFixed(1) ?? '–'}</div>
-            <div className={styles.scoutStrip}>
+            <div className={styles.avgRank}>
+              Avg. Rank: {player.avgRank?.toFixed(1) ?? '–'}
+            </div>
+
+            <div className={`${styles.scoutStrip} ${!ranked ? styles.dimmedScoutStrip : ''}`}>
               {player.rankings &&
                 Object.entries(player.rankings).map(([scout, rank]) => {
                   let dotClass = styles.grayDot;
