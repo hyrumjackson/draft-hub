@@ -145,6 +145,16 @@
   color: #444;
 }
 
+.boldScout {
+  font-weight: 600;
+}
+
 .grayOut {
   filter: grayscale(100%) brightness(80%);
+}
+
+.highlightStat {
+  background-color: #113259;
+  color: white;
+  border-radius: 4px;
 }

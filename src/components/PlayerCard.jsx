@@ -5,7 +5,7 @@ import defaultProfile from '../assets/default-profile.png';
 import styles from './styles/PlayerCard.module.css';
 import { playerImageOverrides } from '../utils/playerPhotos';
 
-export default function PlayerCard({ player, index, stats, statMode, ranked = true }) {
+export default function PlayerCard({ player, index, stats, statMode, ranked = true, sortByStat, sortByScout }) {
   function getStat(statKey) {
     if (!stats || !stats[statKey]) return '–';
 
@@ -54,11 +54,17 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
               </Typography>
 
               <div className={styles.statsRow}>
-                <div className={styles.statBox}><strong>PTS</strong><br />{getStat('PTS')}</div>
-                <div className={styles.statBox}><strong>REB</strong><br />{getStat('TRB')}</div>
-                <div className={styles.statBox}><strong>AST</strong><br />{getStat('AST')}</div>
-                <div className={styles.statBox}><strong>BLK</strong><br />{getStat('BLK')}</div>
-                <div className={styles.statBox}><strong>STL</strong><br />{getStat('STL')}</div>
+                {['PTS', 'TRB', 'AST', 'BLK', 'STL'].map((statKey) => (
+                  <div
+                    key={statKey}
+                    className={`${styles.statBox} ${
+                      sortByStat === statKey ? styles.highlightStat : ''
+                    }`}
+                  >
+                    <strong>{statKey}</strong><br />
+                    {getStat(statKey)}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -84,7 +90,11 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
                   return (
                     <div key={scout} className={styles.scoutDot}>
                       <span className={dotClass} />
-                      <span className={styles.scoutText}>
+                      <span
+                        className={`${styles.scoutText} ${
+                          sortByScout === scout ? styles.boldScout : ''
+                        }`}
+                      >
                         {scoutAbbrev}: {rank ?? 'NR'}
                       </span>
                     </div>

@@ -116,6 +116,8 @@ export default function BigBoard() {
               stats={player.stats}
               statMode={statMode}
               ranked={true}
+              sortByStat={sortByStat}
+              sortByScout={sortByScout}
             />
           ))}
 
@@ -137,6 +139,8 @@ export default function BigBoard() {
               stats={player.stats}
               statMode={statMode}
               ranked={false}
+              sortByStat={sortByStat}
+              sortByScout={sortByScout}
             />
           ))}
         </div>
