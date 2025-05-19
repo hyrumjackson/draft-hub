@@ -169,16 +169,16 @@ export default function PlayerProfile() {
             </div>
 
           {/* Info Cards Below */}
-          <StatCard title="Bio & Measurements">
-            <BioMeasurementsCard player={player} measurements={playerMeasurements} />
+          <StatCard title="Season Averages">
+            <SeasonAveragesCard seasons={playerSeasonStats} />
           </StatCard>
 
           <StatCard title="Game History">
             <GameHistoryCard games={playerGames} />
           </StatCard>
 
-          <StatCard title="Season Averages">
-            <SeasonAveragesCard seasons={playerSeasonStats} />
+          <StatCard title="Bio & Measurements">
+            <BioMeasurementsCard player={player} measurements={playerMeasurements} />
           </StatCard>
 
           <StatCard title="Scout Rankings">
