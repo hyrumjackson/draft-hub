@@ -20,37 +20,39 @@ export default function BioMeasurementsCard({ player, measurements }) {
     ['Hand Width', measurements.handWidth ?? null],
   ] : [];
 
-  function renderSection(title, fields) {
-    const validFields = fields.filter(([_, value]) =>
-      value !== null && value !== undefined && value !== 'N/A'
-    );
-    if (validFields.length === 0) return null;
+  const hasMeasurements = measurementFields.some(([_, val]) => val != null);
+  const hasAthletic = athleticFields.some(([_, val]) => val != null);
 
-    return (
-      <div className={styles.statGroup}>
-        <h4 className={styles.statGroupTitle}>{title}</h4>
-        <div className={styles.twoColumnGrid}>
-          {validFields.map(([label, value]) => (
-            <div key={label} className={styles.inlineFieldRow}>
-              <strong>{label}:</strong> {value}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+  if (!hasMeasurements && !hasAthletic) {
+    return <div className={styles.noDataMessage}>No measurements available.</div>;
   }
 
   return (
-    <div>
-      {renderSection('Measurements', measurementFields)}
-      {renderSection('Athletic Testing', athleticFields)}
-
-      {measurementFields.length === 0 && athleticFields.length === 0 && (
-        <div className={styles.noDataMessage}>
-          No measurements available.
+    <div className={styles.sideBySideGrid}>
+      <div>
+        <h4 className={styles.statGroupTitle}>Measurements</h4>
+        <div className={styles.twoColumnGrid}>
+          {measurementFields
+            .filter(([_, value]) => value != null)
+            .map(([label, value]) => (
+              <div key={label} className={styles.inlineFieldRow}>
+                <strong>{label}:</strong> {value}
+              </div>
+          ))}
         </div>
-      )}
+      </div>
+      <div>
+        <h4 className={styles.statGroupTitle}>Athletic Testing</h4>
+        <div className={styles.twoColumnGrid}>
+          {athleticFields
+            .filter(([_, value]) => value != null)
+            .map(([label, value]) => (
+              <div key={label} className={styles.inlineFieldRow}>
+                <strong>{label}:</strong> {value}
+              </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
-
 }
