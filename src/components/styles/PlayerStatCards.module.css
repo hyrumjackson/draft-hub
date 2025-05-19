@@ -127,3 +127,16 @@
   color: #c62828; /* subtle red */
   font-weight: 600;
 }
+
+.statGroup {
+  margin-bottom: 2rem;
+}
+
+.statGroupTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #113259;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.25rem;
+}

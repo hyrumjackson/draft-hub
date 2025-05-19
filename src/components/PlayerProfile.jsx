@@ -149,7 +149,14 @@ export default function PlayerProfile() {
               <p><strong>Height:</strong> {displayHeight}</p>
               <p><strong>Weight:</strong> {displayWeight}</p>
               <p>
-                <strong>Nationality:</strong> {player.nationality}
+                <strong>Hometown:</strong>{' '}
+                {[
+                  player.homeTown,
+                  player.homeState,
+                  player.homeCountry && !player.homeState ? player.homeCountry : null
+                ]
+                  .filter(Boolean)
+                  .join(', ')}
                 <Flag
                   code={getCountryCode(player.nationality)}
                   className={styles.nationalityFlag}
@@ -195,7 +202,7 @@ export default function PlayerProfile() {
             <GameHistoryCard games={playerGames} />
           </StatCard>
 
-          <StatCard title="Bio & Measurements">
+          <StatCard title="Measurements & Testing">
             <BioMeasurementsCard player={player} measurements={playerMeasurements} />
           </StatCard>
 
