@@ -35,9 +35,26 @@ export default function BigBoard() {
     const lowRank = ranks.length > 0 ? Math.max(...ranks) : null;
     const espnRank = rankingEntry?.['ESPN Rank'] ?? Infinity;
 
-    const stats = seasonLogs.find(
+    const playerSeasons = seasonLogs.filter(
       (s) => s.playerId.toString() === player.playerId.toString()
     );
+
+    let stats = null;
+
+    if (playerSeasons.length > 0) {
+      const byYear = playerSeasons.reduce((acc, s) => {
+        const year = s.Season;
+        if (!acc[year]) acc[year] = [];
+        acc[year].push(s);
+        return acc;
+      }, {});
+
+      const bestPerYear = Object.entries(byYear).map(([year, list]) =>
+        list.reduce((max, curr) => (curr.GP > (max.GP || 0) ? curr : max), {})
+      );
+
+      stats = bestPerYear.sort((a, b) => b.Season - a.Season)[0];
+    }
 
     return {
       ...player,

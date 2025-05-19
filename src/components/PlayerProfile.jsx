@@ -57,9 +57,27 @@ export default function PlayerProfile() {
     setCustomReports([...customReports, reportObj]);
   }
 
-  // Most relevant season: Prefer NCAA or fallback to first available
-  const mainSeason =
-    playerSeasonStats.find((s) => s.League?.includes('NCAA')) || playerSeasonStats[0];
+  function getMainSeason(seasons) {
+    if (!seasons || seasons.length === 0) return null;
+
+    // Group by year
+    const byYear = seasons.reduce((acc, s) => {
+      const year = s.Season;
+      if (!acc[year]) acc[year] = [];
+      acc[year].push(s);
+      return acc;
+    }, {});
+
+    // Get most played season per year
+    const bestPerYear = Object.entries(byYear).map(([year, seasonList]) =>
+      seasonList.reduce((max, curr) => (curr.GP > (max.GP || 0) ? curr : max), {})
+    );
+
+    // Sort by season descending and return the most recent one
+    return bestPerYear.sort((a, b) => b.Season - a.Season)[0];
+  }
+
+  const mainSeason = getMainSeason(playerSeasonStats);
 
   const height =
     playerMeasurements?.heightShoes || player.height || null;
