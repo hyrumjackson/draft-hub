@@ -46,18 +46,30 @@ export default function PlayerProfile() {
 
   function calculateAge(birthDateStr) {
     if (!birthDateStr) return null;
-
     const birthDate = new Date(birthDateStr);
     const now = new Date();
     const ageInMs = now - birthDate;
     const ageInYears = ageInMs / (1000 * 60 * 60 * 24 * 365.25);
-
     return ageInYears.toFixed(1);
   }
 
   function handleAddReport(reportObj) {
     setCustomReports([...customReports, reportObj]);
-  }  
+  }
+
+  // Most relevant season: Prefer NCAA or fallback to first available
+  const mainSeason =
+    playerSeasonStats.find((s) => s.League?.includes('NCAA')) || playerSeasonStats[0];
+
+  const height =
+    playerMeasurements?.heightShoes || player.height || null;
+  const weight =
+    playerMeasurements?.weight || player.weight || null;
+
+  const displayHeight = height ? `${Math.floor(height / 12)}'${Math.round(height % 12)}"` : 'N/A';
+  const displayWeight = weight ? `${weight} lbs` : 'N/A';
+
+  const seasonLabel = mainSeason?.Season?.toString() || 'Season';
 
   return (
     <div className={styles.page}>
@@ -72,9 +84,9 @@ export default function PlayerProfile() {
         <div className={styles.leftColumn}>
           <img
             src={
-              playerImageOverrides[player.playerId] 
-              || player.photoUrl
-              || defaultProfile
+              playerImageOverrides[player.playerId] ||
+              player.photoUrl ||
+              defaultProfile
             }
             alt={player.name}
             className={styles.playerImage}
@@ -91,30 +103,72 @@ export default function PlayerProfile() {
           </button>
         </div>
 
-        {/* Right Column: Info Cards */}
+        {/* Right Column: Header and Cards */}
         <div className={styles.rightColumn}>
-          <h2>{player.name}</h2>
-          <p className={styles.inlineIconText}>
-            <strong>Team:</strong>{' '}
-            {player.currentTeam}
-            {teamLogos[player.currentTeam] && (
-              <img
-                src={teamLogos[player.currentTeam]}
-                alt={`${player.currentTeam} logo`}
-                className={styles.inlineIcon}
-              />
-            )}
-          </p>
-          <p><strong>Age:</strong> {calculateAge(player.birthDate) || 'N/A'}</p>
-          <p>
-            <strong>Nationality:</strong> {player.nationality}
-            <Flag
-              code={getCountryCode(player.nationality)}
-              className={styles.nationalityFlag}
-            />
-          </p>
-          <br />
+          {/* Custom Header Block (not in StatCard) */}
+          <div className={styles.playerOverviewHeader}>
+            {/* Left Section: Name, Team, League */}
+            <div className={styles.section}>
+              <h1 className={styles.playerName}>{player.name}</h1>
+              <p className={styles.teamLine}>
+                {player.currentTeam}
+                {teamLogos[player.currentTeam] && (
+                  <img
+                    src={teamLogos[player.currentTeam]}
+                    alt={`${player.currentTeam} logo`}
+                    className={styles.inlineIcon}
+                  />
+                )}
+              </p>
+              <p className={styles.leagueText}>{player.leagueType}</p>
+            </div>
 
+            <div className={styles.verticalDivider} />
+
+            {/* Middle: Age, Height, Weight, Nationality */}
+            <div className={styles.section}>
+              <p><strong>Age:</strong> {calculateAge(player.birthDate) || 'N/A'}</p>
+              <p><strong>Height:</strong> {displayHeight}</p>
+              <p><strong>Weight:</strong> {displayWeight}</p>
+              <p>
+                <strong>Nationality:</strong> {player.nationality}
+                <Flag
+                  code={getCountryCode(player.nationality)}
+                  className={styles.nationalityFlag}
+                />
+              </p>
+            </div>
+
+            <div className={styles.verticalDivider} />
+
+            {/* Right: Stats Table */}
+            <div className={styles.statTableContainer}>
+              <div className={styles.statTableHeader}>{seasonLabel} SEASON STATS</div>
+                <table className={styles.statTable}>
+                  <thead>
+                    <tr>
+                      {['PTS', 'TRB', 'AST', 'BLK', 'FG%'].map((statKey) => (
+                        <th key={statKey}>{statKey}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {['PTS', 'TRB', 'AST', 'BLK', 'FG%'].map((statKey) => {
+                        const val = mainSeason?.[statKey];
+                        return (
+                          <td key={statKey}>
+                            {val != null ? val : '—'}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          {/* Info Cards Below */}
           <StatCard title="Bio & Measurements">
             <BioMeasurementsCard player={player} measurements={playerMeasurements} />
           </StatCard>

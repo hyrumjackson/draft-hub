@@ -119,3 +119,82 @@
   font-size: 0.95rem;
   color: #113259;
 }
+
+.playerOverviewHeader {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 140px;
+}
+
+.verticalDivider {
+  width: 1px;
+  background-color: #ddd;
+  margin: 0 1rem;
+  align-self: stretch;
+}
+
+.playerName {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.teamLine {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.leagueText {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.statTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.statTable th {
+  text-align: center;
+  font-weight: 400;
+  color: #555;
+  padding: 0.5rem;
+}
+
+.statTable td {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #113259;
+  padding: 0.5rem 1rem;
+}
+
+.statTableContainer {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.statTableHeader {
+  background-color: #003087;
+  color: white;
+  text-align: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px 6px 0 0;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
