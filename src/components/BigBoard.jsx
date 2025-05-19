@@ -4,12 +4,15 @@ import styles from './styles/BigBoard.module.css';
 import Header from './Header';
 import FilterPanel from '../components/FilterPanel';
 import PlayerCard from '../components/PlayerCard';
+import { Card, CardContent } from '@mui/material';
 
 export default function BigBoard() {
   const [statMode, setStatMode] = useState('Per Game');
   const [sortByScout, setSortByScout] = useState('Average');
   const [sortByStat, setSortByStat] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
+  // Enrich player data
   const players = bio.map((player) => {
     const rankingEntry = scoutRankings.find(
       (r) => r.playerId.toString() === player.playerId.toString()
@@ -47,6 +50,7 @@ export default function BigBoard() {
     };
   });
 
+  // Sorting logic
   function getSortableStat(stats = {}, key, mode) {
     const value = stats[key];
     const gp = stats.GP || 1;
@@ -81,14 +85,33 @@ export default function BigBoard() {
     }
   });
 
-  let rankedPlayers = [];
-  let unrankedPlayers = [];
+  // Build index map (based on full sorted list)
+  const playerIndexMap = new Map();
+  sortedPlayers.forEach((player, i) => {
+    playerIndexMap.set(player.playerId, i + 1);
+  });
+
+  // Search filter (non-impactful on index)
+  function matchesSearch(player) {
+    const q = searchQuery.toLowerCase();
+    return (
+      player.name.toLowerCase().includes(q) ||
+      player.currentTeam.toLowerCase().includes(q) ||
+      player.leagueType.toLowerCase().includes(q)
+    );
+  }
+
+  const filteredPlayers = sortedPlayers.filter(matchesSearch);
+
+  // Split ranked/unranked (from filtered)
+  let visibleRankedPlayers = [];
+  let visibleUnrankedPlayers = [];
 
   if (sortByScout && sortByScout !== 'Average') {
-    rankedPlayers = sortedPlayers.filter(p => p.rankings?.[sortByScout] != null);
-    unrankedPlayers = sortedPlayers.filter(p => p.rankings?.[sortByScout] == null);
+    visibleRankedPlayers = filteredPlayers.filter(p => p.rankings?.[sortByScout] != null);
+    visibleUnrankedPlayers = filteredPlayers.filter(p => p.rankings?.[sortByScout] == null);
   } else {
-    rankedPlayers = sortedPlayers;
+    visibleRankedPlayers = filteredPlayers;
   }
 
   return (
@@ -104,15 +127,18 @@ export default function BigBoard() {
             setSortByScout={setSortByScout}
             sortByStat={sortByStat}
             setSortByStat={setSortByStat}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
           />
         </div>
 
         <div className={styles.cardContainer}>
-          {rankedPlayers.map((player, index) => (
+          {/* Ranked */}
+          {visibleRankedPlayers.map((player) => (
             <PlayerCard
               key={player.playerId}
               player={player}
-              index={index + 1}
+              index={playerIndexMap.get(player.playerId)}
               stats={player.stats}
               statMode={statMode}
               ranked={true}
@@ -121,7 +147,8 @@ export default function BigBoard() {
             />
           ))}
 
-          {sortByScout && sortByScout !== 'Average' && unrankedPlayers.length > 0 && (
+          {/* Divider if applicable */}
+          {sortByScout && sortByScout !== 'Average' && visibleUnrankedPlayers.length > 0 && (
             <div className={styles.notRankedDivider}>
               <hr className={styles.horizontalLine} />
               <div className={styles.dividerLabel}>
@@ -131,7 +158,8 @@ export default function BigBoard() {
             </div>
           )}
 
-          {unrankedPlayers.map((player) => (
+          {/* Unranked */}
+          {visibleUnrankedPlayers.map((player) => (
             <PlayerCard
               key={player.playerId}
               player={player}
@@ -143,6 +171,17 @@ export default function BigBoard() {
               sortByScout={sortByScout}
             />
           ))}
+
+          {/* No matches */}
+          {visibleRankedPlayers.length === 0 && visibleUnrankedPlayers.length === 0 && (
+            <Card className={styles.card}>
+              <CardContent className={styles.cardContent}>
+                <div className={styles.noMatches}>
+                  No players match your search.
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </div>

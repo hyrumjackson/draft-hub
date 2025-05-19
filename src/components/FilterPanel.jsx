@@ -8,7 +8,8 @@ import {
   Tabs,
   Tab,
   Select,
-  MenuItem
+  MenuItem,
+  TextField
 } from '@mui/material';
 import styles from './styles/FilterPanel.module.css';
 
@@ -18,7 +19,9 @@ export default function FilterPanel({
   sortByScout,
   setSortByScout,
   sortByStat,
-  setSortByStat
+  setSortByStat,
+  searchQuery,
+  setSearchQuery
 }) {
   const statModes = ['Per Game', 'Per 36', 'Totals'];
 
@@ -38,6 +41,23 @@ export default function FilterPanel({
   return (
     <Card>
       <CardContent>
+        <TextField
+          fullWidth
+          label="Search"
+          variant="outlined"
+          size="small"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          sx={{ marginBottom: 2 }}
+          InputProps={{
+            endAdornment: searchQuery && (
+              <Button onClick={() => setSearchQuery('')} size="small">
+                ×
+              </Button>
+            ),
+          }}
+        />
+
         <Typography variant="body2" gutterBottom className={styles.filterSection}>
           Stat Mode
         </Typography>
