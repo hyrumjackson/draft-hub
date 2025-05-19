@@ -117,3 +117,13 @@
   font-size: 0.75rem;
   color: #888;
 }
+
+.winText {
+  color: #2e7d32; /* subtle green */
+  font-weight: 600;
+}
+
+.lossText {
+  color: #c62828; /* subtle red */
+  font-weight: 600;
+}

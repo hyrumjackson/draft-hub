@@ -6,6 +6,8 @@ export default function GameHistoryCard({ games }) {
     return <p>No game logs available.</p>;
   }
 
+  const sortedGames = [...games].sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return (
     <div className={styles.tableWrapper}>
       <table className={styles.gameTable}>
@@ -13,27 +15,52 @@ export default function GameHistoryCard({ games }) {
           <tr>
             <th>Date</th>
             <th>Opponent</th>
+            <th>Result</th>
+            <th>MP</th>
             <th>PTS</th>
             <th>REB</th>
             <th>AST</th>
-            <th>FGM/FGA</th>
-            <th>3PM/3PA</th>
-            <th>FTM/FTA</th>
+            <th>STL</th>
+            <th>BLK</th>
+            <th>TOV</th>
+            <th>+/-</th>
+            <th>FG</th>
+            <th>3P</th>
+            <th>FT</th>
           </tr>
         </thead>
         <tbody>
-          {games.map((game) => (
-            <tr key={game.gameId}>
-              <td>{new Date(game.date).toLocaleDateString()}</td>
-              <td>{game.opponent}</td>
-              <td>{game.pts}</td>
-              <td>{game.reb}</td>
-              <td>{game.ast}</td>
-              <td>{game.fgm}/{game.fga}</td>
-              <td>{game.tpm}/{game.tpa}</td>
-              <td>{game.ftm}/{game.fta}</td>
-            </tr>
-          ))}
+          {sortedGames.map((g) => {
+            const isWin = (g.isHome && g.homeTeamPts > g.visitorTeamPts) || (!g.isHome && g.homeTeamPts < g.visitorTeamPts);
+            const result = isWin ? 'W' : 'L';
+            const score = g.isHome
+              ? `${g.homeTeamPts}-${g.visitorTeamPts}`
+              : `${g.visitorTeamPts}-${g.homeTeamPts}`;
+            const opponentText = g.isHome ? `vs ${g.opponent}` : `@ ${g.opponent}`;
+
+            return (
+              <tr key={g.gameId}>
+                <td>{new Date(g.date).toLocaleDateString()}</td>
+                <td>{opponentText}</td>
+                <td>
+                  <span>
+                    <span className={isWin ? styles.winText : styles.lossText}>{result}</span> {score}
+                  </span>
+                </td>
+                <td>{g.timePlayed}</td>
+                <td>{g.pts}</td>
+                <td>{g.reb}</td>
+                <td>{g.ast}</td>
+                <td>{g.stl}</td>
+                <td>{g.blk}</td>
+                <td>{g.tov}</td>
+                <td>{g.plusMinus > 0 ? `+${g.plusMinus}` : g.plusMinus}</td>
+                <td>{g.fgm}/{g.fga}</td>
+                <td>{g.tpm}/{g.tpa}</td>
+                <td>{g.ftm}/{g.fta}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
