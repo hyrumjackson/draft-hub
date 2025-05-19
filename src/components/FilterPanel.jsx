@@ -115,7 +115,7 @@ export default function FilterPanel({
             <MenuItem value="TRB">Rebounds</MenuItem>
             <MenuItem value="AST">Assists</MenuItem>
             <MenuItem value="BLK">Blocks</MenuItem>
-            <MenuItem value="STL">Steals</MenuItem>
+            <MenuItem value="FG%">Field Goal %</MenuItem>
           </Select>
         )}
       </CardContent>

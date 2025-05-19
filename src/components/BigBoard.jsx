@@ -58,6 +58,9 @@ export default function BigBoard() {
 
     if (value == null) return -Infinity;
 
+    // FG% is a rate stat — never scale it
+    if (key === 'FG%') return value;
+
     switch (mode) {
       case 'Totals': return value * gp;
       case 'Per 36': return mp > 0 ? (value / mp) * 36 : 0;

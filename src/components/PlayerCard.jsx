@@ -7,23 +7,22 @@ import { playerImageOverrides } from '../utils/playerPhotos';
 
 export default function PlayerCard({ player, index, stats, statMode, ranked = true, sortByStat, sortByScout }) {
   function getStat(statKey) {
-    if (!stats || !stats[statKey]) return '–';
+    if (!stats || stats[statKey] == null) return '–';
 
     const value = stats[statKey];
     const gp = stats.GP || 1;
     const mp = stats.MP || 1;
 
-    switch (statMode) {
-      case 'Per Game':
-        return value.toFixed(1);
-      case 'Totals':
-        return (value * gp).toFixed(0);
-      case 'Per 36':
-        return mp > 0 ? ((value / mp) * 36).toFixed(1) : '–';
-      default:
-        return value.toFixed(1);
-    }
+  switch (statMode) {
+    case 'Totals':
+      return statKey === 'FG%' ? value.toFixed(1) : (value * gp).toFixed(0);
+    case 'Per 36':
+      return statKey === 'FG%' ? value.toFixed(1) : mp > 0 ? ((value / mp) * 36).toFixed(1) : '–';
+    case 'Per Game':
+    default:
+      return value.toFixed(1);
   }
+}
 
   return (
     <Link to={`/player/${player.playerId}`} className={styles.cardLink}>
@@ -54,7 +53,7 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
               </Typography>
 
               <div className={styles.statsRow}>
-                {['PTS', 'TRB', 'AST', 'BLK', 'STL'].map((statKey) => (
+                {['PTS', 'TRB', 'AST', 'BLK', 'FG%'].map((statKey) => (
                   <div
                     key={statKey}
                     className={`${styles.statBox} ${
