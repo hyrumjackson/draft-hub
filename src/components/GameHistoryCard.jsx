@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './styles/PlayerStatCards.module.css';
+import GameHistoryModal from './GameHistoryModal';
 
 export default function GameHistoryCard({ games }) {
   if (!games || games.length === 0) {
@@ -7,6 +8,8 @@ export default function GameHistoryCard({ games }) {
   }
 
   const [expanded, setExpanded] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
   const displayLimit = expanded ? 10 : 5;
 
   const sortedGames = [...games].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -67,11 +70,25 @@ export default function GameHistoryCard({ games }) {
         </tbody>
       </table>
       {sortedGames.length > 5 && (
-        <div className={styles.pullTabWrapper}>
-          <div className={styles.pullTab} onClick={() => setExpanded(!expanded)}>
-            <span className={styles.pullArrow}>{expanded ? '▲' : '▼'}</span>
+        <>
+          <div className={styles.pullTabWrapper}>
+            <div className={styles.pullTab} onClick={() => setExpanded(!expanded)}>
+              <span className={styles.pullArrow}>{expanded ? '▲' : '▼'}</span>
+            </div>
           </div>
-        </div>
+
+          <div className={styles.seeMoreRow}>
+            <span className={styles.seeMoreLink} onClick={() => setModalOpen(true)}>
+              See All Stats
+            </span>
+          </div>
+
+          <GameHistoryModal
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+            games={games}
+          />
+        </>
       )}
     </div>
   );

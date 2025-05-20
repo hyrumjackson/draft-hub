@@ -82,6 +82,25 @@
   line-height: 1;
 }
 
+.seeMoreRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.seeMoreLink {
+  font-size: 0.8rem;
+  color: #113259;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.seeMoreLink:hover {
+  color: #0d2340;
+}
+
 .reportsWrapper {
   display: flex;
   flex-direction: column;
