@@ -4,13 +4,16 @@ import styles from './styles/BigBoard.module.css';
 import Header from './Header';
 import FilterPanel from '../components/FilterPanel';
 import PlayerCard from '../components/PlayerCard';
-import { Card, CardContent } from '@mui/material';
+import { Button, Card, CardContent } from '@mui/material';
 
 export default function BigBoard() {
   const [statMode, setStatMode] = useState('Per Game');
   const [sortByScout, setSortByScout] = useState('Average');
   const [sortByStat, setSortByStat] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
   // Enrich player data
   const players = bio.map((player) => {
@@ -140,21 +143,45 @@ export default function BigBoard() {
 
       <div className={styles.content}>
         <div className={styles.sidebar}>
-          <FilterPanel
-            statMode={statMode}
-            setStatMode={setStatMode}
-            sortByScout={sortByScout}
-            setSortByScout={setSortByScout}
-            sortByStat={sortByStat}
-            setSortByStat={setSortByStat}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            availableScouts={Array.from(new Set(
-              scoutRankings.flatMap((entry) =>
-                Object.keys(entry).filter((k) => k !== 'playerId' && entry[k] != null)
-              )
-            )).sort()}
-          />
+          {isMobile && !filtersOpen ? (
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => setFiltersOpen(true)}
+              sx={{ mb: 2 }}
+            >
+              Show Filter & Sort
+            </Button>
+          ) : (
+            <>
+              {isMobile && (
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  onClick={() => setFiltersOpen(false)}
+                  sx={{ mb: 2 }}
+                >
+                  Hide Filters
+                </Button>
+              )}
+              <FilterPanel
+                statMode={statMode}
+                setStatMode={setStatMode}
+                sortByScout={sortByScout}
+                setSortByScout={setSortByScout}
+                sortByStat={sortByStat}
+                setSortByStat={setSortByStat}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                availableScouts={Array.from(new Set(
+                  scoutRankings.flatMap((entry) =>
+                    Object.keys(entry).filter((k) => k !== 'playerId' && entry[k] != null)
+                  )
+                )).sort()}
+              />
+            </>
+          )}
         </div>
 
         <div className={styles.cardContainer}>

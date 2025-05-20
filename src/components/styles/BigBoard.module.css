@@ -84,3 +84,28 @@
   font-size: 1.1rem;
   color: #666;
 }
+
+/* Mobile friendly styles */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+    top: auto;
+  }
+
+  .cardContainer {
+    width: 100%;
+  }
+
+  .noMatches {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
