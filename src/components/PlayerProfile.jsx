@@ -114,7 +114,7 @@ export default function PlayerProfile() {
             }}
           />
 
-          <ScoutRankings data={playerRankings} />
+          <ScoutRankings data={playerRankings} customReports={customReports} />
 
           <button
             className={styles.scoutButton}

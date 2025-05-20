@@ -1,14 +1,22 @@
 import React from 'react';
 import styles from './styles/ScoutRankings.module.css';
 
-export default function ScoutRankings({ data }) {
-  const playerRanks = data?.[0];
+export default function ScoutRankings({ data, customReports = [] }) {
+  const playerRanks = data?.[0] || {};
 
-  if (!playerRanks) {
-    return <div className={styles.statCard}><div className={styles.cardTitle}>Scout Rankings</div><div className={styles.cardContent}><p>No scout rankings available.</p></div></div>;
-  }
+  const customRanks = customReports
+    .filter((r) => r.rank !== null && r.rank !== undefined)
+    .reduce((acc, r) => {
+      acc[`${r.scout}`] = r.rank;
+      return acc;
+    }, {});
 
-  const scoutEntries = Object.entries(playerRanks)
+  const combinedRanks = {
+    ...playerRanks,
+    ...customRanks
+  };
+
+  const scoutEntries = Object.entries(combinedRanks)
     .filter(([key]) => key !== 'playerId')
     .sort(([aKey, aVal], [bKey, bVal]) => {
       if (aVal === null) return 1;

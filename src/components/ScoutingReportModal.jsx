@@ -10,20 +10,26 @@ import {
 
 export default function ScoutingReportModal({ open, onClose, onSubmit, playerId }) {
   const [name, setName] = useState('');
+  const [rank, setRank] = useState('');
   const [text, setText] = useState('');
 
   const handleSubmit = () => {
     if (text.trim() === '' || name.trim() === '') return;
 
+    const parsedRank = parseInt(rank);
+    const validRank = !isNaN(parsedRank) && parsedRank >= 1 && parsedRank <= 100;
+
     const reportObj = {
       scout: name.trim(),
       reportId: crypto.randomUUID(),
       playerId: playerId,
-      report: text.trim()
+      report: text.trim(),
+      rank: validRank ? parsedRank : null
     };
 
     onSubmit(reportObj);
     setName('');
+    setRank('');
     setText('');
     onClose();
   };
@@ -38,6 +44,15 @@ export default function ScoutingReportModal({ open, onClose, onSubmit, playerId 
           value={name}
           onChange={(e) => setName(e.target.value)}
           sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          fullWidth
+          label="Ranking (1–100)"
+          type="number"
+          value={rank}
+          onChange={(e) => setRank(e.target.value)}
+          sx={{ marginBottom: 2 }}
+          inputProps={{ min: 1, max: 100 }}
         />
         <TextField
           fullWidth
