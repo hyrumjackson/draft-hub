@@ -58,3 +58,36 @@
   text-transform: none;
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .tableWrapper {
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .gameTable {
+    font-size: 0.72rem;
+    min-width: 600px;
+  }
+
+  .glossaryList {
+    column-count: 1;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    column-gap: 1rem;
+  }
+
+  .glossary {
+    font-size: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .glossaryList li {
+    margin-bottom: 0.3rem;
+  }
+
+  .cancelButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

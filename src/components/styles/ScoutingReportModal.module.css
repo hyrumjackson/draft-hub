@@ -45,3 +45,26 @@
   text-transform: none;
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .dialogPaper {
+    padding: 1rem;
+  }
+
+  .dialogTitle {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .inputFieldTop,
+  .inputFieldMiddle,
+  .inputFieldBottom {
+    margin-bottom: 1rem;
+  }
+}

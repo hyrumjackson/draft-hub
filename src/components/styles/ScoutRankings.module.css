@@ -56,3 +56,11 @@
 .grayDot {
   background-color: #bdc3c7;
 }
+
+@media (max-width: 768px) {
+  .cardTitle {
+    text-align: left;
+    font-size: 1rem;
+    padding-left: 0.25rem;
+  }
+}
