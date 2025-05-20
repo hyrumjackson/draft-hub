@@ -53,7 +53,7 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
               </Typography>
 
               <div className={styles.statsRow}>
-                {['PTS', 'TRB', 'AST', 'BLK', 'FG%'].map((statKey) => (
+                {['PTS', 'TRB', 'AST', 'FG%'].map((statKey) => (
                   <div
                     key={statKey}
                     className={`${styles.statBox} ${

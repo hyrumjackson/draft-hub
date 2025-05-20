@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Card,
   CardContent,
-  Typography,
   ButtonGroup,
   Button,
   Tabs,
@@ -37,6 +36,14 @@ export default function FilterPanel({
       setSortByScout(null);
       setSortByStat(sortByStat || 'PTS');
     }
+  };
+
+  const handleReset = () => {
+    setSearchQuery('');
+    setStatMode('Per Game');
+    setSortByScout('Average');
+    setSortByStat(null);
+    setSortMode('scout');
   };
 
   return (
@@ -96,6 +103,7 @@ export default function FilterPanel({
         {sortMode === 'stat' && (
           <Select
             fullWidth
+            size="small"
             value={sortByStat || 'PTS'}
             onChange={(e) => setSortByStat(e.target.value)}
             sx={{ marginTop: 1 }}
@@ -103,7 +111,6 @@ export default function FilterPanel({
             <MenuItem value="PTS">Points</MenuItem>
             <MenuItem value="TRB">Rebounds</MenuItem>
             <MenuItem value="AST">Assists</MenuItem>
-            <MenuItem value="BLK">Blocks</MenuItem>
             <MenuItem value="FG%">Field Goal %</MenuItem>
           </Select>
         )}
@@ -124,6 +131,16 @@ export default function FilterPanel({
             </Button>
           ))}
         </ButtonGroup>
+
+        <Button
+          fullWidth
+          onClick={handleReset}
+          className={styles.resetButton}
+          variant="outlined"
+          sx={{ marginTop: 2 }}
+        >
+          Reset Filters
+        </Button>
       </CardContent>
     </Card>
   );

@@ -1,5 +1,5 @@
 import aceBailey from '../assets/players/ace-bailey.png';
-import jeremiahFears from '../assets/players/jeremiah-fears.jpg';
+import jeremiahFears from '../assets/players/jeremiah-fears.png';
 import joanBeringer from '../assets/players/joan-beringer.png';
 import benSaraf from '../assets/players/ben-saraf.png';
 import willRiley from '../assets/players/will-riley.png';

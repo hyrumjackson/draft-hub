@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   bio,
   measurements,
@@ -115,7 +115,7 @@ export default function PlayerProfile() {
     <div className={styles.page}>
       <Header title="2025 NBA DRAFT HUB" subtitle="Player Profile" />
 
-      <div className={styles.backButton} onClick={() => navigate(-1)}>
+      <div className={styles.backButton} onClick={() => navigate('/')}>
         ← Back
       </div>
 
@@ -197,14 +197,14 @@ export default function PlayerProfile() {
                 <table className={styles.statTable}>
                   <thead>
                     <tr>
-                      {['PTS', 'TRB', 'AST', 'BLK', 'FG%'].map((statKey) => (
+                      {['PTS', 'TRB', 'AST', 'FG%'].map((statKey) => (
                         <th key={statKey}>{statKey}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      {['PTS', 'TRB', 'AST', 'BLK', 'FG%'].map((statKey) => {
+                      {['PTS', 'TRB', 'AST', 'FG%'].map((statKey) => {
                         let val = mainSeason?.[statKey];
 
                         // Apply total math only to non-percentage stats

@@ -24,7 +24,7 @@ export default function GameHistoryCard({ games }) {
             <th>Result</th>
             <th>MP</th>
             <th>PTS</th>
-            <th>REB</th>
+            <th>TRB</th>
             <th>AST</th>
             <th>STL</th>
             <th>BLK</th>

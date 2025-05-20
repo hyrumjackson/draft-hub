@@ -34,7 +34,9 @@ export default function SeasonAveragesCard({ seasons, fullSeasons, mode, setMode
       </div>
 
       <div className={styles.cardTitleRow}>
-        <h3 className={styles.cardTitle}>Season Averages</h3>
+        <h3 className={styles.cardTitle}>
+          {mode === 'totals' ? 'Season Totals' : 'Season Averages'}
+        </h3>
       </div>
 
       <div className={styles.tableWrapper}>
