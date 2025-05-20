@@ -53,6 +53,35 @@
   font-weight: bold;
 }
 
+.pullTabWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pullTab {
+  width: 100px;
+  height: 25px;
+  background-color: #eee;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pullTab:hover {
+  background-color: #ddd;
+}
+
+.pullArrow {
+  font-size: 1.1rem;
+  color: #444;
+  user-select: none;
+  line-height: 1;
+}
+
 .reportsWrapper {
   display: flex;
   flex-direction: column;

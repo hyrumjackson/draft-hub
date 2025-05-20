@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles/PlayerStatCards.module.css';
 
 export default function GameHistoryCard({ games }) {
   if (!games || games.length === 0) {
     return <p>No game logs available.</p>;
   }
+
+  const [expanded, setExpanded] = useState(false);
+  const displayLimit = expanded ? 10 : 5;
 
   const sortedGames = [...games].sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -30,7 +33,7 @@ export default function GameHistoryCard({ games }) {
           </tr>
         </thead>
         <tbody>
-          {sortedGames.map((g) => {
+          {sortedGames.slice(0, displayLimit).map((g) => {
             const isWin = (g.isHome && g.homeTeamPts > g.visitorTeamPts) || (!g.isHome && g.homeTeamPts < g.visitorTeamPts);
             const result = isWin ? 'W' : 'L';
             const score = g.isHome
@@ -63,6 +66,13 @@ export default function GameHistoryCard({ games }) {
           })}
         </tbody>
       </table>
+      {sortedGames.length > 5 && (
+        <div className={styles.pullTabWrapper}>
+          <div className={styles.pullTab} onClick={() => setExpanded(!expanded)}>
+            <span className={styles.pullArrow}>{expanded ? '▲' : '▼'}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
