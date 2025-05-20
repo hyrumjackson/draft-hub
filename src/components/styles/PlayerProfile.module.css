@@ -25,6 +25,7 @@
 
 .playerImage {
   width: 100%;
+  height: 350px;
   border-radius: 6px;
   object-fit: cover;
 }
