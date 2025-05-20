@@ -7,6 +7,7 @@ import {
   TextField,
   Button
 } from '@mui/material';
+import styles from './styles/ScoutingReportModal.module.css';
 
 export default function ScoutingReportModal({ open, onClose, onSubmit, playerId }) {
   const [name, setName] = useState('');
@@ -36,36 +37,51 @@ export default function ScoutingReportModal({ open, onClose, onSubmit, playerId 
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>Create Scouting Report</DialogTitle>
+      <DialogTitle className={styles.dialogTitle}>Create Scouting Report</DialogTitle>
       <DialogContent>
-        <TextField
-          fullWidth
-          label="Scout Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          fullWidth
-          label="Ranking (1–100)"
-          type="number"
-          value={rank}
-          onChange={(e) => setRank(e.target.value)}
-          sx={{ marginBottom: 2 }}
-          inputProps={{ min: 1, max: 100 }}
-        />
-        <TextField
-          fullWidth
-          multiline
-          label="Scouting Report"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          rows={4}
-        />
+        <div className={styles.inputFieldTop}>
+          <TextField
+            fullWidth
+            label="Scout Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div className={styles.inputFieldMiddle}>
+          <TextField
+            fullWidth
+            label="Ranking"
+            type="number"
+            value={rank}
+            onChange={(e) => setRank(e.target.value)}
+            InputProps={{ classes: { root: styles.inputRoot } }}
+            InputLabelProps={{ className: styles.inputRoot }}
+          />
+        </div>
+
+        <div className={styles.inputFieldBottom}>
+          <TextField
+            fullWidth
+            multiline
+            label="Scouting Report"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows={4}
+          />
+        </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+        <Button onClick={onClose} className={styles.cancelButton}>
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          className={styles.submitButton}
+        >
+          Submit
+        </Button>
       </DialogActions>
     </Dialog>
   );
