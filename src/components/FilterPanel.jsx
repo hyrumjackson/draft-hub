@@ -21,7 +21,8 @@ export default function FilterPanel({
   sortByStat,
   setSortByStat,
   searchQuery,
-  setSearchQuery
+  setSearchQuery,
+  availableScouts = []
 }) {
   const statModes = ['Per Game', 'Per 36', 'Totals'];
 
@@ -96,11 +97,11 @@ export default function FilterPanel({
             sx={{ marginTop: 1 }}
           >
             <MenuItem value="Average">Average</MenuItem>
-            <MenuItem value="ESPN Rank">ESPN</MenuItem>
-            <MenuItem value="Sam Vecenie Rank">Sam Vecenie</MenuItem>
-            <MenuItem value="Kevin O'Connor Rank">Kevin O'Connor</MenuItem>
-            <MenuItem value="Kyle Boone Rank">Kyle Boone</MenuItem>
-            <MenuItem value="Gary Parrish Rank">Gary Parrish</MenuItem>
+            {availableScouts.map((scout) => (
+              <MenuItem key={scout} value={scout}>
+                {scout.replace(' Rank', '')}
+              </MenuItem>
+            ))}
           </Select>
         )}
 

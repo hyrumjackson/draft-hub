@@ -149,6 +149,11 @@ export default function BigBoard() {
             setSortByStat={setSortByStat}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
+            availableScouts={Array.from(new Set(
+              scoutRankings.flatMap((entry) =>
+                Object.keys(entry).filter((k) => k !== 'playerId' && entry[k] != null)
+              )
+            )).sort()}
           />
         </div>
 

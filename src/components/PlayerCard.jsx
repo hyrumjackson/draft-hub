@@ -76,29 +76,40 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
 
             <div className={`${styles.scoutStrip} ${!ranked ? styles.dimmedScoutStrip : ''}`}>
               {player.rankings &&
-                Object.entries(player.rankings).map(([scout, rank]) => {
-                  let dotClass = styles.grayDot;
-                  if (rank !== null) {
+                Object.entries(player.rankings)
+                  .filter(([, rank]) => rank != null)
+                  .sort(([aName, aRank], [bName, bRank]) => {
+                    if (aRank !== bRank) return aRank - bRank;
+                    return aName.localeCompare(bName);
+                  })
+                  .sort(([nameA], [nameB]) => {
+                    // Move selected scout to the top (if it's in the list)
+                    if (!sortByScout) return 0;
+                    if (nameA === sortByScout) return -1;
+                    if (nameB === sortByScout) return 1;
+                    return 0;
+                  })
+                  .map(([scout, rank]) => {
+                    const shortName = scout.split(' ')[0];
+                    let dotClass = styles.grayDot;
                     if (rank === player.highRank) dotClass = styles.greenDot;
                     else if (rank === player.lowRank) dotClass = styles.redDot;
                     else dotClass = styles.neutralDot;
-                  }
 
-                  const scoutAbbrev = scout.replace(' Rank', '').split(' ')[0];
-
-                  return (
-                    <div key={scout} className={styles.scoutDot}>
-                      <span className={dotClass} />
-                      <span
-                        className={`${styles.scoutText} ${
-                          sortByScout === scout ? styles.boldScout : ''
-                        }`}
-                      >
-                        {scoutAbbrev}: {rank ?? 'NR'}
-                      </span>
-                    </div>
-                  );
-                })}
+                    return (
+                      <div key={scout} className={styles.scoutDot}>
+                        <span className={dotClass} />
+                        <span
+                          className={`${styles.scoutText} ${
+                            sortByScout === scout ? styles.boldScout : ''
+                          }`}
+                        >
+                          {shortName}: {rank}
+                        </span>
+                      </div>
+                    );
+                  })
+              }
             </div>
           </div>
         </CardContent>
