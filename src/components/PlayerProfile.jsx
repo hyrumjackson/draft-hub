@@ -113,6 +113,9 @@ export default function PlayerProfile() {
               e.target.src = defaultProfile;
             }}
           />
+
+          <ScoutRankings data={playerRankings} />
+
           <button
             className={styles.scoutButton}
             onClick={() => setModalOpen(true)}
@@ -204,10 +207,6 @@ export default function PlayerProfile() {
 
           <StatCard title="Measurements & Testing">
             <BioMeasurementsCard player={player} measurements={playerMeasurements} />
-          </StatCard>
-
-          <StatCard title="Scout Rankings">
-            <ScoutRankings data={playerRankings} />
           </StatCard>
 
           <StatCard title="Scouting Reports">
