@@ -96,16 +96,17 @@
 }
 
 .avgRank {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.4rem;
+  color: #113259;
 }
 
 .scoutStrip {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
 }
 
 .scoutDot {
@@ -137,7 +138,7 @@
   background-color: #bdc3c7;
 }
 .neutralDot {
-  background-color: #999;
+  background-color: #ffffff;
 }
 
 .scoutLabel {
