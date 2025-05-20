@@ -8,8 +8,13 @@ import {
   Tab,
   Select,
   MenuItem,
-  TextField
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton
 } from '@mui/material';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import ClearIcon from '@mui/icons-material/Clear';
 import styles from './styles/FilterPanel.module.css';
 
 export default function FilterPanel({
@@ -24,7 +29,6 @@ export default function FilterPanel({
   availableScouts = []
 }) {
   const statModes = ['Per Game', 'Per 36', 'Totals'];
-
   const [sortMode, setSortMode] = React.useState('scout');
 
   const handleTabChange = (event, newValue) => {
@@ -59,21 +63,26 @@ export default function FilterPanel({
           sx={{ marginBottom: 2 }}
           InputProps={{
             endAdornment: searchQuery && (
-              <span className={styles.clearIcon} onClick={() => setSearchQuery('')}>
-                ×
-              </span>
-            ),
+              <InputAdornment position="end">
+                <IconButton
+                  size="small"
+                  onClick={() => setSearchQuery('')}
+                  className={styles.clearIcon}
+                >
+                  <ClearIcon fontSize="small" />
+                </IconButton>
+              </InputAdornment>
+            )
           }}
         />
 
-        <div className={styles.sortLabel}>
-          <h4 className='sortLabel'>
-            Sort By
-          </h4>
-        </div>
+        <Typography variant="subtitle1" className={styles.sortLabel}>
+          Sort By
+        </Typography>
 
         <Tabs
           value={sortMode}
+          size="small"
           onChange={handleTabChange}
           indicatorColor="primary"
           textColor="primary"
@@ -115,11 +124,10 @@ export default function FilterPanel({
           </Select>
         )}
 
-        <div className={styles.statLabel}>
-          <h4 className='statLabel'>
-            Stat Mode
-          </h4>
-        </div>
+        <Typography variant="subtitle1" className={styles.statLabel} sx={{ marginTop: 1.5 }}>
+          Stat Mode
+        </Typography>
+
         <ButtonGroup fullWidth variant="outlined">
           {statModes.map((mode) => (
             <Button
@@ -138,6 +146,7 @@ export default function FilterPanel({
           className={styles.resetButton}
           variant="outlined"
           sx={{ marginTop: 2 }}
+          startIcon={<RestartAltIcon />}
         >
           Reset Filters
         </Button>
