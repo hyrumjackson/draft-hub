@@ -28,11 +28,33 @@ export default function PlayerProfile() {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [customReports, setCustomReports] = useState([]);
+  const [seasonStatMode, setSeasonStatMode] = useState('averages');
 
   const player = bio.find((p) => p.playerId.toString() === id);
   const playerMeasurements = measurements.find((m) => m.playerId.toString() === id);
   const playerGames = gameLogs.filter((g) => g.playerId.toString() === id);
-  const playerSeasonStats = seasonLogs.filter((s) => s.playerId.toString() === id);
+
+  const allSeasons = seasonLogs.filter((s) => s.playerId.toString() === id);
+
+  // Group seasons by year
+  const groupedByYear = allSeasons.reduce((acc, season) => {
+    const year = season.Season;
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(season);
+    return acc;
+  }, {});
+
+  // Filter: keep GP >= 10 OR the most-played season per year
+  const filteredSeasons = Object.values(groupedByYear).flatMap((seasonGroup) => {
+    const qualifying = seasonGroup.filter((s) => s.GP >= 10);
+    if (qualifying.length > 0) return qualifying;
+
+    // If none have GP >= 10, return the one with the most games
+    return [seasonGroup.reduce((max, curr) => (curr.GP > max.GP ? curr : max), seasonGroup[0])];
+  });
+
+  filteredSeasons.sort((a, b) => b.Season - a.Season);
+
   const playerRankings = scoutRankings.filter((r) => r.playerId.toString() === id);
   const playerReports = scoutingReports.filter((e) => e.playerId.toString() === id);
 
@@ -77,7 +99,7 @@ export default function PlayerProfile() {
     return bestPerYear.sort((a, b) => b.Season - a.Season)[0];
   }
 
-  const mainSeason = getMainSeason(playerSeasonStats);
+  const mainSeason = getMainSeason(allSeasons);
 
   const height =
     playerMeasurements?.heightShoes || player.height || null;
@@ -183,7 +205,19 @@ export default function PlayerProfile() {
                   <tbody>
                     <tr>
                       {['PTS', 'TRB', 'AST', 'BLK', 'FG%'].map((statKey) => {
-                        const val = mainSeason?.[statKey];
+                        let val = mainSeason?.[statKey];
+
+                        // Apply total math only to non-percentage stats
+                        const isPercentage = statKey.includes('%');
+                        if (
+                          seasonStatMode === 'totals' &&
+                          val != null &&
+                          mainSeason?.GP &&
+                          !isPercentage
+                        ) {
+                          val = Math.round(val * mainSeason.GP);
+                        }
+
                         return (
                           <td key={statKey}>
                             {val != null ? val : '—'}
@@ -197,9 +231,11 @@ export default function PlayerProfile() {
             </div>
 
           {/* Info Cards Below */}
-          <StatCard title="Season Averages">
-            <SeasonAveragesCard seasons={playerSeasonStats} />
-          </StatCard>
+          <SeasonAveragesCard
+            seasons={filteredSeasons}
+            mode={seasonStatMode}
+            setMode={setSeasonStatMode}
+          />
 
           <StatCard title="Game History">
             <GameHistoryCard games={playerGames} />

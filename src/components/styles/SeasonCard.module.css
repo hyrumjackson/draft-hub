@@ -1,0 +1,58 @@
+.statCard {
+  background-color: #fff;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.cardTopRight {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+}
+
+.cardTitleRow {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #113259;
+  margin: 0;
+}
+
+.toggleGroup {
+  height: 2rem;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.gameTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.gameTable th,
+.gameTable td {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.gameTable th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.leagueSubtext {
+  font-size: 0.75rem;
+  color: #888;
+}

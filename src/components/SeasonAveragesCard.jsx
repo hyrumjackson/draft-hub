@@ -1,56 +1,76 @@
-import React from 'react';
-import styles from './styles/PlayerStatCards.module.css';
+import React, { useState } from 'react';
+import styles from './styles/SeasonCard.module.css';
+import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
-export default function SeasonAveragesCard({ seasons }) {
+export default function SeasonAveragesCard({ seasons, mode, setMode }) {
   if (!seasons || seasons.length === 0) {
     return <p>No season averages available.</p>;
   }
 
+  const numericStatKeys = ['MP', 'PTS', 'TRB', 'AST', 'STL', 'BLK', 'TOV'];
+
+  const getDisplayValue = (season, stat) => {
+    if (mode === 'averages') return season[stat];
+    const value = season[stat] * season.GP;
+    return isNaN(value) ? '—' : Math.round(value);
+  };
+
   return (
-    <div className={styles.tableWrapper}>
-      <table className={styles.gameTable}>
-        <thead>
-          <tr>
-            <th>Season</th>
-            <th>Team</th>
-            <th>W–L</th>
-            <th>MP</th>
-            <th>PTS</th>
-            <th>REB</th>
-            <th>AST</th>
-            <th>STL</th>
-            <th>BLK</th>
-            <th>TOV</th>
-            <th>FG%</th>
-            <th>3P%</th>
-            <th>FT%</th>
-            <th>eFG%</th>
-          </tr>
-        </thead>
-        <tbody>
-          {seasons.map((s, i) => (
-            <tr key={i}>
-              <td>{s.Season}</td>
-              <td>
-                <div>{s.Team}</div>
-                <div className={styles.leagueSubtext}>{s.League}</div>
-              </td>
-              <td>{`${s.w}-${s.l}`}</td>
-              <td>{s.MP}</td>
-              <td>{s.PTS}</td>
-              <td>{s.TRB}</td>
-              <td>{s.AST}</td>
-              <td>{s.STL}</td>
-              <td>{s.BLK}</td>
-              <td>{s.TOV}</td>
-              <td>{s['FG%']?.toFixed(1) ?? '—'}</td>
-              <td>{s['3P%']?.toFixed(1) ?? '—'}</td>
-              <td>{s.FTP?.toFixed(1) ?? '—'}</td>
-              <td>{s['eFG%']?.toFixed(1) ?? '—'}</td>
+    <div className={styles.statCard}>
+      <div className={styles.cardTopRight}>
+        <ToggleButtonGroup
+          className={styles.toggleGroup}
+          size="small"
+          exclusive
+          value={mode}
+          onChange={(_, newMode) => newMode && setMode(newMode)}
+        >
+          <ToggleButton value="averages">AVG</ToggleButton>
+          <ToggleButton value="totals">TOT</ToggleButton>
+        </ToggleButtonGroup>
+      </div>
+
+      <div className={styles.cardTitleRow}>
+        <h3 className={styles.cardTitle}>Season Averages</h3>
+      </div>
+
+      <div className={styles.tableWrapper}>
+        <table className={styles.gameTable}>
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>Team</th>
+              <th>W–L</th>
+              {numericStatKeys.map((stat) => (
+                <th key={stat}>{stat}</th>
+              ))}
+              <th>FG%</th>
+              <th>3P%</th>
+              <th>FT%</th>
+              <th>eFG%</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {seasons.map((s, i) => (
+              <tr key={i}>
+                <td>{s.Season}</td>
+                <td>
+                  <div>{s.Team}</div>
+                  <div className={styles.leagueSubtext}>{s.League}</div>
+                </td>
+                <td>{`${s.w}-${s.l}`}</td>
+                {numericStatKeys.map((stat) => (
+                  <td key={stat}>{getDisplayValue(s, stat)}</td>
+                ))}
+                <td>{s['FG%']?.toFixed(1) ?? '—'}</td>
+                <td>{s['3P%']?.toFixed(1) ?? '—'}</td>
+                <td>{s.FTP?.toFixed(1) ?? '—'}</td>
+                <td>{s['eFG%']?.toFixed(1) ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
