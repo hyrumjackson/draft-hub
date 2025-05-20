@@ -52,31 +52,18 @@ export default function FilterPanel({
           sx={{ marginBottom: 2 }}
           InputProps={{
             endAdornment: searchQuery && (
-              <Button onClick={() => setSearchQuery('')} size="small">
+              <span className={styles.clearIcon} onClick={() => setSearchQuery('')}>
                 ×
-              </Button>
+              </span>
             ),
           }}
         />
 
-        <Typography variant="body2" gutterBottom className={styles.filterSection}>
-          Stat Mode
-        </Typography>
-        <ButtonGroup fullWidth variant="outlined">
-          {statModes.map((mode) => (
-            <Button
-              key={mode}
-              variant={statMode === mode ? 'contained' : 'outlined'}
-              onClick={() => setStatMode(mode)}
-            >
-              {mode}
-            </Button>
-          ))}
-        </ButtonGroup>
-
-        <Typography variant="body2" gutterBottom sx={{ marginTop: 2 }}>
-          Sort By
-        </Typography>
+        <div className={styles.sortLabel}>
+          <h4 className='sortLabel'>
+            Sort By
+          </h4>
+        </div>
 
         <Tabs
           value={sortMode}
@@ -92,6 +79,7 @@ export default function FilterPanel({
         {sortMode === 'scout' && (
           <Select
             fullWidth
+            size="small"
             value={sortByScout || 'Average'}
             onChange={(e) => setSortByScout(e.target.value)}
             sx={{ marginTop: 1 }}
@@ -119,6 +107,23 @@ export default function FilterPanel({
             <MenuItem value="FG%">Field Goal %</MenuItem>
           </Select>
         )}
+
+        <div className={styles.statLabel}>
+          <h4 className='statLabel'>
+            Stat Mode
+          </h4>
+        </div>
+        <ButtonGroup fullWidth variant="outlined">
+          {statModes.map((mode) => (
+            <Button
+              key={mode}
+              variant={statMode === mode ? 'contained' : 'outlined'}
+              onClick={() => setStatMode(mode)}
+            >
+              {mode}
+            </Button>
+          ))}
+        </ButtonGroup>
       </CardContent>
     </Card>
   );

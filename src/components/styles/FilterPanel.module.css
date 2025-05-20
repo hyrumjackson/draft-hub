@@ -1,7 +1,112 @@
-.radioGroup {
-  font-size: 0.85rem;
+/* === TEXT HEADERS === */
+
+.filterSection {
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.radioLabel {
+.sortLabel {
+  margin-top: 0;
+  color: #113259;
+}
+
+.statLabel {
+  margin-top: 1.25rem;
+  margin-bottom: 0.25rem;
+  color: #113259;
+}
+
+
+/* === SEARCH FIELD === */
+
+.searchClearButton {
+  min-width: 0;
+  padding: 0 6px;
+  font-size: 1rem;
+  color: #113259;
+}
+
+:global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+  border-color: #113259 !important;
+}
+
+:global(.MuiInputLabel-root.Mui-focused) {
+  color: #113259 !important;
+}
+
+.clearIcon {
+  cursor: pointer;
+  color: #113259;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  user-select: none;
+}
+
+.clearIcon:hover {
+  color: #0d2340;
+}
+
+/* === TABS (Scout / Stat) === */
+
+:global(.MuiTabs-root) {
+  margin-top: 0.25rem;
+}
+
+:global(.MuiTab-root) {
+  text-transform: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #444 !important;
+  padding: 0.5rem;
+}
+
+:global(.Mui-selected) {
+  color: #113259 !important;
+}
+
+:global(.MuiTabs-indicator) {
+  background-color: #113259 !important;
+}
+
+/* === STAT MODE BUTTON GROUP === */
+
+:global(.MuiButtonGroup-root) {
+  margin-top: .5rem;
+}
+
+:global(.MuiButton-root) {
+  text-transform: none;
+  font-weight: 500;
   font-size: 0.85rem;
+  border-radius: 0 !important;
+}
+
+:global(.MuiButtonGroup-root > .MuiButton-root:first-of-type) {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+:global(.MuiButtonGroup-root > .MuiButton-root:last-of-type) {
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+:global(.MuiButton-contained) {
+  background-color: #113259 !important;
+  color: white !important;
+  border-color: #113259 !important;
+}
+
+:global(.MuiButton-outlined) {
+  border-color: #113259 !important;
+  color: #113259 !important;
+  background-color: white;
+}
+
+:global(.MuiButton-outlined:hover) {
+  background-color: #11325910;
+  border-color: #113259;
+  color: #113259;
 }
