@@ -56,3 +56,21 @@
   font-size: 0.75rem;
   color: #888;
 }
+
+.seeMoreRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.seeMoreLink {
+  font-size: 0.8rem;
+  color: #113259;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.seeMoreLink:hover {
+  color: #0d2340;
+}

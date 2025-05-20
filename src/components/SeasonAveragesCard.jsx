@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import styles from './styles/SeasonCard.module.css';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
+import SeasonAveragesModal from './SeasonAveragesModal';
 
-export default function SeasonAveragesCard({ seasons, mode, setMode }) {
+export default function SeasonAveragesCard({ seasons, fullSeasons, mode, setMode }) {
   if (!seasons || seasons.length === 0) {
     return <p>No season averages available.</p>;
   }
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const numericStatKeys = ['MP', 'PTS', 'TRB', 'AST', 'STL', 'BLK', 'TOV'];
 
@@ -70,6 +73,18 @@ export default function SeasonAveragesCard({ seasons, mode, setMode }) {
             ))}
           </tbody>
         </table>
+
+        <div className={styles.seeMoreRow}>
+          <span className={styles.seeMoreLink} onClick={() => setModalOpen(true)}>
+            See All Stats
+          </span>
+        </div>
+
+        <SeasonAveragesModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          seasons={fullSeasons}
+        />
       </div>
     </div>
   );

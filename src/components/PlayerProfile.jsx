@@ -233,6 +233,7 @@ export default function PlayerProfile() {
           {/* Info Cards Below */}
           <SeasonAveragesCard
             seasons={filteredSeasons}
+            fullSeasons={allSeasons}
             mode={seasonStatMode}
             setMode={setSeasonStatMode}
           />

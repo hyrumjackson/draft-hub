@@ -1,0 +1,60 @@
+.tableWrapper {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.gameTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.gameTable th,
+.gameTable td {
+  padding: 0.3rem 0.5rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.gameTable th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.leagueSubtext {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.glossary {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.glossaryList {
+  column-count: 4;
+  column-gap: 2rem;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.glossaryList li {
+  break-inside: avoid;
+  margin-bottom: 0.5rem;
+}
+
+.glossary ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.cancelButton {
+  color: #444 !important;
+  background-color: transparent !important;
+  text-transform: none;
+  font-weight: 500;
+}
