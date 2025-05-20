@@ -119,6 +119,71 @@ export default function PlayerProfile() {
         ← Back
       </div>
 
+      <div className={styles.mobileHeader}>
+        <img
+          src={
+            playerImageOverrides[player.playerId] ||
+            player.photoUrl ||
+            defaultProfile
+          }
+          alt={player.name}
+          className={styles.mobilePlayerThumb}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = defaultProfile;
+          }}
+        />
+
+        <div className={styles.mobileHeaderText}>
+          <h1 className={styles.playerName}>{player.name}</h1>
+          <p className={styles.teamLine}>{player.currentTeam} - {player.leagueType}</p>
+          <p><strong>Age:</strong> {calculateAge(player.birthDate) || 'N/A'}</p>
+          <p><strong>Height:</strong> {displayHeight}</p>
+          <p><strong>Weight:</strong> {displayWeight}</p>
+          <p>
+            <strong>Hometown:</strong>{' '}
+            {[player.homeTown, player.homeState, player.homeCountry && !player.homeState ? player.homeCountry : null]
+              .filter(Boolean)
+              .join(', ')}
+            <Flag code={getCountryCode(player.homeCountry)} className={styles.nationalityFlag} />
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.mobileStatTable}>
+        <div className={styles.statTableHeader}>{seasonLabel} SEASON STATS</div>
+          <table className={styles.statTable}>
+            <thead>
+              <tr>
+                {['PTS', 'TRB', 'AST', 'FG%'].map((statKey) => (
+                  <th key={statKey}>{statKey}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {['PTS', 'TRB', 'AST', 'FG%'].map((statKey) => {
+                  let val = mainSeason?.[statKey];
+                  const isPercentage = statKey.includes('%');
+                  if (
+                    seasonStatMode === 'totals' &&
+                    val != null &&
+                    mainSeason?.GP &&
+                    !isPercentage
+                  ) {
+                    val = Math.round(val * mainSeason.GP);
+                  }
+                  return (
+                    <td key={statKey}>
+                      {val != null ? val : '—'}
+                    </td>
+                  );
+                })}
+              </tr>
+            </tbody>
+          </table>
+      </div>
+
       <div className={styles.content}>
         {/* Left Column: Image + Button */}
         <div className={styles.leftColumn}>

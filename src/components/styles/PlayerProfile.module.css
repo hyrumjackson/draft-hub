@@ -59,12 +59,14 @@
   height: 1em;
   width: auto;
   vertical-align: middle;
+  margin-top: -0.2rem;
 }
 
 .nationalityFlag {
   width: 24px;
   height: 18px;
   margin-left: 0.5rem;
+  margin-top: -0.3rem;
   vertical-align: middle;
 }
 
@@ -210,4 +212,127 @@
   padding: 1rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
+}
+
+.mobileHeader {
+  display: none;
+}
+
+.mobileStatTable {
+  display: none;
+}
+
+/* Mobile friendly styles */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .leftColumn {
+    width: 100%;
+    align-items: center;
+  }
+
+  .playerImage {
+    width: 80%;
+    height: auto;
+    max-height: 300px;
+  }
+
+  .playerOverviewHeader {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .section {
+    align-items: center;
+    text-align: center;
+  }
+
+  .playerName {
+    font-size: 1.5rem;
+  }
+
+  .verticalDivider {
+    display: none;
+  }
+
+  .statTableContainer {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .statTable {
+    min-width: 300px;
+    font-size: 0.85rem;
+  }
+
+  .inlineIcon {
+    display: none;
+  }
+
+  .nationalityFlag {
+    margin-top: -0.5rem;
+  }
+
+  .mobileHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .mobilePlayerThumb {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .mobileHeaderText {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+
+  .mobileHeaderText p {
+    margin: 0.25rem 0;
+  }
+
+  .playerOverviewHeader {
+    display: none;
+  }
+
+  .playerImage {
+    display: none;
+  }
+
+  .mobileStatTable {
+    display: block;
+    margin: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    padding: 0.5rem;
+  }
+
+  .statTableHeader {
+    background-color: #003087;
+    color: white;
+    text-align: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px 6px 0 0;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .statTableContainer {
+    display: none;
+  }
 }

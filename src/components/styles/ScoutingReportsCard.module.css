@@ -57,3 +57,28 @@
 .scoutButton:hover {
   background-color: #0d2340;
 }
+
+/* Mobile friendly styles */
+@media (max-width: 768px) {
+  .twoColumnGrid,
+  .sideBySideGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statCard {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+  }
+
+  .inlineFieldRow {
+    font-size: 0.85rem;
+  }
+
+  .gameTable {
+    font-size: 0.75rem;
+  }
+}
