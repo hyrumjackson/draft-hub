@@ -158,7 +158,7 @@ export default function PlayerProfile() {
                   .filter(Boolean)
                   .join(', ')}
                 <Flag
-                  code={getCountryCode(player.nationality)}
+                  code={getCountryCode(player.homeCountry)}
                   className={styles.nationalityFlag}
                 />
               </p>

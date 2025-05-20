@@ -27,32 +27,25 @@ export default function BioMeasurementsCard({ player, measurements }) {
     return <div className={styles.noDataMessage}>No measurements available.</div>;
   }
 
+  const section = (title, fields) => (
+    <div>
+      <h4 className={styles.statGroupTitle}>{title}</h4>
+      <div className={styles.twoColumnGrid}>
+        {fields
+          .filter(([_, value]) => value != null)
+          .map(([label, value]) => (
+            <div key={label} className={styles.inlineFieldRow}>
+              <strong>{label}:</strong> {value}
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+
   return (
-    <div className={styles.sideBySideGrid}>
-      <div>
-        <h4 className={styles.statGroupTitle}>Measurements</h4>
-        <div className={styles.twoColumnGrid}>
-          {measurementFields
-            .filter(([_, value]) => value != null)
-            .map(([label, value]) => (
-              <div key={label} className={styles.inlineFieldRow}>
-                <strong>{label}:</strong> {value}
-              </div>
-          ))}
-        </div>
-      </div>
-      <div>
-        <h4 className={styles.statGroupTitle}>Athletic Testing</h4>
-        <div className={styles.twoColumnGrid}>
-          {athleticFields
-            .filter(([_, value]) => value != null)
-            .map(([label, value]) => (
-              <div key={label} className={styles.inlineFieldRow}>
-                <strong>{label}:</strong> {value}
-              </div>
-          ))}
-        </div>
-      </div>
+    <div className={hasMeasurements && hasAthletic ? styles.sideBySideGrid : undefined}>
+      {hasMeasurements && section('Measurements', measurementFields)}
+      {hasAthletic && section('Athletic Testing', athleticFields)}
     </div>
   );
 }
