@@ -43,6 +43,10 @@
 
 .sidebar {
   width: 250px;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+  z-index: 10;
 }
 
 .cardContainer {
