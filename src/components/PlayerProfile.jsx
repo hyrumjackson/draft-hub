@@ -245,9 +245,10 @@ export default function PlayerProfile() {
             <BioMeasurementsCard player={player} measurements={playerMeasurements} />
           </StatCard>
 
-          <StatCard title="Scouting Reports">
-            <ScoutingReportsCard reports={[...playerReports, ...customReports]} />
-          </StatCard>
+          <ScoutingReportsCard
+            reports={[...playerReports, ...customReports]}
+            onCreate={() => setModalOpen(true)}
+          />
         </div>
       </div>
 

@@ -40,6 +40,10 @@
   cursor: pointer;
 }
 
+.scoutButton:hover {
+  background-color: #0d2340;
+}
+
 .rightColumn {
   flex: 1;
 }
