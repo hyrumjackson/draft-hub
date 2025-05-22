@@ -1,10 +1,10 @@
 .statCard {
-  background-color: #fff;
+  background-color: #FFFFFF;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #BBC4CA;
   position: relative;
+  font-family: 'Figtree', sans-serif;
 }
 
 .cardTopRight {
@@ -14,20 +14,22 @@
 }
 
 .cardTitleRow {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #BBC4CA;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }
 
 .cardTitle {
   font-size: 1.25rem;
-  font-weight: bold;
-  color: #113259;
+  font-weight: normal;
+  color: #00285E;
   margin: 0;
+  font-family: 'Russo One', sans-serif;
 }
 
 .toggleGroup {
   height: 2rem;
+  font-family: 'Figtree', sans-serif;
 }
 
 .tableWrapper {
@@ -44,17 +46,20 @@
 .gameTable td {
   padding: 0.5rem;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 1px solid #BBC4CA;
+  color: #00285E;
 }
 
 .gameTable th {
-  background-color: #f0f0f0;
-  font-weight: bold;
+  background-color: #F5F7FA;
+  font-weight: 600;
+  font-family: 'Figtree', sans-serif;
 }
 
 .leagueSubtext {
   font-size: 0.75rem;
-  color: #888;
+  color: #6D7A85;
+  font-family: 'Figtree', sans-serif;
 }
 
 .seeMoreRow {
@@ -65,14 +70,14 @@
 
 .seeMoreLink {
   font-size: 0.8rem;
-  color: #113259;
+  color: #0053BC;
   cursor: pointer;
   text-decoration: underline;
   font-weight: 500;
 }
 
 .seeMoreLink:hover {
-  color: #0d2340;
+  color: #00285E;
 }
 
 /* Mobile friendly styles */
@@ -85,6 +90,7 @@
   .statCard {
     padding: 1rem;
     margin-bottom: 1rem;
+    position: relative;
   }
 
   .cardTitle {

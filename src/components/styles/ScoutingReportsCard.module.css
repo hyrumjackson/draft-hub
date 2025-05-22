@@ -1,25 +1,26 @@
 .reportCardWrapper {
-  background-color: #fff;
+  background-color: #FFFFFF;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #BBC4CA;
+  font-family: 'Figtree', sans-serif;
 }
 
 .reportHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #BBC4CA;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }
 
 .cardTitle {
   font-size: 1.25rem;
-  font-weight: bold;
-  color: #113259;
+  font-weight: normal;
+  color: #00285E;
   margin: 0;
+  font-family: 'Russo One', sans-serif;
 }
 
 .reportsWrapper {
@@ -31,54 +32,37 @@
 .reportCard {
   background-color: #f9f9f9;
   padding: 1rem;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-family: 'Figtree', sans-serif;
 }
 
 .reportCard strong {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
-  color: #113259;
+  color: #00285E;
 }
 
 .scoutButton {
   padding: 0.5rem 1rem;
-  font-weight: bold;
-  background-color: #113259;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  font-weight: 600;
+  background-color: #0053BC;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 0;
   cursor: pointer;
   font-size: 0.9rem;
+  font-family: 'Figtree', sans-serif;
   transition: background-color 0.2s;
+  text-transform: uppercase;
 }
 
 .scoutButton:hover {
-  background-color: #0d2340;
+  background-color: #00285E;
 }
 
 /* Mobile friendly styles */
 @media (max-width: 768px) {
-  .twoColumnGrid,
-  .sideBySideGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .statCard {
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-
   .cardTitle {
     font-size: 1rem;
-  }
-
-  .inlineFieldRow {
-    font-size: 0.85rem;
-  }
-
-  .gameTable {
-    font-size: 0.75rem;
   }
 }

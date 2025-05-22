@@ -57,7 +57,18 @@ export default function SeasonAveragesModal({ open, onClose, seasons }) {
         </div>
 
         <div className={styles.glossary}>
-          <Typography variant="subtitle2" gutterBottom>Glossary</Typography>
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            sx={{
+              fontFamily: 'Figtree, sans-serif',
+              fontSize: '1.15rem',
+              fontWeight: 600,
+              color: '#00285E'
+            }}
+          >
+            Glossary
+          </Typography>
           <ul className={styles.glossaryList}>
             <li><strong>W–L</strong> – Wins and losses</li>
             <li><strong>MP</strong> – Minutes Played</li>

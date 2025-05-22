@@ -113,7 +113,7 @@ export default function PlayerProfile() {
 
   return (
     <div className={styles.page}>
-      <Header title="2025 NBA DRAFT HUB" subtitle="Player Profile" />
+      <Header title="2025 NBA Draft Hub" subtitle="Player Profile" />
 
       <div className={styles.backButton} onClick={() => navigate('/')}>
         ← Back
@@ -259,6 +259,7 @@ export default function PlayerProfile() {
             {/* Right: Stats Table */}
             <div className={styles.statTableContainer}>
               <div className={styles.statTableHeader}>{seasonLabel} SEASON STATS</div>
+              <div className={styles.statTableBody}>
                 <table className={styles.statTable}>
                   <thead>
                     <tr>
@@ -294,6 +295,7 @@ export default function PlayerProfile() {
                 </table>
               </div>
             </div>
+          </div>
 
           {/* Info Cards Below */}
           <SeasonAveragesCard

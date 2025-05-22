@@ -9,6 +9,10 @@
   max-width: 900px;
   margin: 0 auto;
   overflow: visible !important;
+  border: 1px solid #BBC4CA;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-color: #FFFFFF;
 }
 
 .cardContainer {
@@ -37,12 +41,12 @@
   flex-direction: column;
   justify-content: center;
   font-size: 0.875rem;
-  color: #333;
+  color: #00285E;
 }
 
 .rankingBox {
   font-size: 0.875rem;
-  color: #333;
+  color: #00285E;
   line-height: 1.4;
 }
 
@@ -50,7 +54,7 @@
   width: 125px;
   height: 175px;
   object-fit: cover;
-  border-radius: 3px;
+  border-radius: 0;
   margin-right: 1rem;
 }
 
@@ -59,7 +63,7 @@
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #BBC4CA;
   padding-right: 1rem;
 }
 
@@ -71,18 +75,25 @@
 
 .statBox {
   padding: 0.25rem 0.75rem;
-  background-color: #e0e0e0;
-  border-radius: 6px;
+  background-color: #BBC4CA;
+  border-radius: 0;
   font-weight: 600;
   font-size: 0.875rem;
   text-align: center;
+  color: #00285E;
+}
+
+.highlightStat {
+  background-color: #0053BC;
+  color: #FFFFFF;
+  border-radius: 0;
 }
 
 .rankBadge {
   position: absolute;
-  top: -10px;
-  left: -10px;
-  background-color: #113259;
+  top: -12.5px;
+  left: -12.5px;
+  background-color: #00285E;
   color: white;
   border-radius: 50%;
   width: 28px;
@@ -99,7 +110,7 @@
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.4rem;
-  color: #113259;
+  color: #00285E;
 }
 
 .scoutStrip {
@@ -118,14 +129,22 @@
 
 .scoutText {
   font-size: 0.75rem;
-  color: #444;
+  color: rgba(0, 0, 0, 0.6);
   white-space: nowrap;
 }
 
-.greenDot, .redDot, .grayDot, .neutralDot {
+.greenDot, .redDot, .paleGreenDot, .paleRedDot, .neutralDot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
+}
+
+.paleGreenDot {
+  background-color: #a8e6a1;
+}
+
+.paleRedDot {
+  background-color: #f4b2b0;
 }
 
 .greenDot {
@@ -134,11 +153,8 @@
 .redDot {
   background-color: #e74c3c;
 }
-.grayDot {
-  background-color: #bdc3c7;
-}
 .neutralDot {
-  background-color: #ffffff;
+  background-color: #BBC4CA;
 }
 
 .scoutLabel {
@@ -152,12 +168,6 @@
 
 .grayOut {
   filter: grayscale(100%) brightness(80%);
-}
-
-.highlightStat {
-  background-color: #113259;
-  color: white;
-  border-radius: 4px;
 }
 
 /* Mobile friendly styles */
@@ -218,6 +228,7 @@
   .scoutText {
     font-size: 0.7rem;
   }
+
   .scoutStrip {
     flex-direction: row;
     flex-wrap: nowrap;
@@ -229,21 +240,21 @@
   .scoutDot {
     flex-shrink: 0;
   }
-  
+
   .filterToggle {
     width: 100%;
-    background-color: #113259;
+    background-color: #00285E;
     color: white;
     font-size: 1rem;
     padding: 0.75rem;
     border: none;
     margin-bottom: 1rem;
-    border-radius: 6px;
+    border-radius: 0;
     font-weight: bold;
     cursor: pointer;
   }
 
   .filterToggle:hover {
-    background-color: #0d2340;
+    background-color: #001f49;
   }
 }

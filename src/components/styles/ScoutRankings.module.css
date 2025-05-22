@@ -1,24 +1,35 @@
 .statCard {
-  background-color: #fff;
+  background-color: #FFFFFF;
   padding: 1.5rem;
   margin-top: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #BBC4CA;
+  border-radius: 0;
+  box-shadow: none;
   width: 100%;
+  font-family: 'Figtree', sans-serif;
 }
 
 .cardTitle {
   text-align: center;
   font-size: 1.25rem;
-  color: #113259;
-  border-bottom: 1px solid #eee;
+  font-family: 'Russo One', sans-serif;
+  color: #00285E;
+  border-bottom: 1px solid #BBC4CA;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
+  font-weight: normal;
 }
 
 .cardContent {
   font-size: 0.95rem;
-  color: #333;
+  color: #00285E;
+}
+
+.averageRank {
+  text-align: center;
+  font-size: 1rem;
+  color: #00285E;
+  margin-bottom: 0.75rem;
 }
 
 .scoutRow {
@@ -28,6 +39,7 @@
   font-size: 0.9rem;
   margin-bottom: 0.25rem;
   gap: 0.5rem;
+  color: #444;
 }
 
 .scoutDotPlaceholder {
@@ -36,8 +48,11 @@
   display: inline-block;
 }
 
+/* Dot styles */
 .greenDot,
 .redDot,
+.paleGreenDot,
+.paleRedDot,
 .grayDot {
   width: 10px;
   height: 10px;
@@ -49,12 +64,20 @@
   background-color: #2ecc71;
 }
 
+.paleGreenDot {
+  background-color: #a8e6a1;
+}
+
 .redDot {
   background-color: #e74c3c;
 }
 
+.paleRedDot {
+  background-color: #f4b2b0;
+}
+
 .grayDot {
-  background-color: #bdc3c7;
+  background-color: #BBC4CA;
 }
 
 @media (max-width: 768px) {
@@ -62,5 +85,9 @@
     text-align: left;
     font-size: 1rem;
     padding-left: 0.25rem;
+  }
+
+  .scoutRow {
+    font-size: 0.85rem;
   }
 }

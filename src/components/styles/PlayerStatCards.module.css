@@ -1,22 +1,24 @@
 .statCard {
-  background-color: #fff;
+  background-color: #FFFFFF;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #BBC4CA;
+  font-family: 'Figtree', sans-serif;
 }
 
 .cardTitle {
   margin-bottom: 1rem;
   font-size: 1.25rem;
-  color: #113259;
-  border-bottom: 1px solid #eee;
+  color: #00285E;
+  border-bottom: 1px solid #BBC4CA;
   padding-bottom: 0.5rem;
+  font-family: 'Russo One', sans-serif;
+  font-weight: normal;
 }
 
 .cardContent {
   font-size: 0.95rem;
-  color: #333;
+  color: #00285E;
 }
 
 .twoColumnGrid {
@@ -45,12 +47,14 @@
 .gameTable td {
   padding: 0.5rem;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 1px solid #BBC4CA;
+  color: #00285E;
 }
 
 .gameTable th {
-  background-color: #f0f0f0;
-  font-weight: bold;
+  background-color: #F5F7FA;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
 }
 
 .pullTabWrapper {
@@ -61,7 +65,7 @@
 .pullTab {
   width: 100px;
   height: 25px;
-  background-color: #eee;
+  background-color: #F5F7FA;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   display: flex;
@@ -72,12 +76,12 @@
 }
 
 .pullTab:hover {
-  background-color: #ddd;
+  background-color: #e8ebef;
 }
 
 .pullArrow {
   font-size: 1.1rem;
-  color: #444;
+  color: #00285E;
   user-select: none;
   line-height: 1;
 }
@@ -91,14 +95,14 @@
 
 .seeMoreLink {
   font-size: 0.8rem;
-  color: #113259;
+  color: #0053BC;
   cursor: pointer;
   text-decoration: underline;
   font-weight: 500;
 }
 
 .seeMoreLink:hover {
-  color: #0d2340;
+  color: #00285E;
 }
 
 .reportsWrapper {
@@ -108,17 +112,17 @@
 }
 
 .reportCard {
-  background-color: #f9f9f9;
+  background-color: #FFFFFF;
   padding: 1rem;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid #BBC4CA;
+  font-family: 'Figtree', sans-serif;
 }
 
 .reportCard strong {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
-  color: #113259;
+  color: #00285E;
 }
 
 .inlineFieldRow {
@@ -136,16 +140,16 @@
 
 .leagueSubtext {
   font-size: 0.75rem;
-  color: #888;
+  color: #6D7A85;
 }
 
 .winText {
-  color: #2e7d32; /* subtle green */
+  color: #2e7d32;
   font-weight: 600;
 }
 
 .lossText {
-  color: #c62828; /* subtle red */
+  color: #c62828;
   font-weight: 600;
 }
 
@@ -155,11 +159,12 @@
 
 .statGroupTitle {
   font-size: 1rem;
-  font-weight: bold;
-  color: #113259;
+  font-weight: normal;
+  color: #00285E;
   margin-bottom: 0.75rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #BBC4CA;
   padding-bottom: 0.25rem;
+  font-family: 'Russo One', sans-serif;
 }
 
 .sideBySideGrid {

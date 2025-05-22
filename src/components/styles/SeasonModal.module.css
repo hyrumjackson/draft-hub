@@ -1,6 +1,7 @@
 .tableWrapper {
   overflow-x: auto;
   margin-bottom: 1rem;
+  font-family: 'Figtree', sans-serif;
 }
 
 .gameTable {
@@ -13,24 +14,27 @@
 .gameTable td {
   padding: 0.3rem 0.5rem;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 1px solid #BBC4CA;
+  color: #00285E;
 }
 
 .gameTable th {
-  background-color: #f0f0f0;
-  font-weight: bold;
+  background-color: #F5F7FA;
+  font-weight: 600;
   white-space: nowrap;
+  font-family: 'Figtree', sans-serif;
 }
 
 .leagueSubtext {
   font-size: 0.75rem;
-  color: #888;
+  color: #6D7A85;
 }
 
 .glossary {
   margin-top: 2rem;
   font-size: 0.85rem;
-  color: #333;
+  color: #00285E;
+  font-family: 'Figtree', sans-serif;
 }
 
 .glossaryList {
@@ -53,12 +57,26 @@
 }
 
 .cancelButton {
-  color: #444 !important;
+  color: #00285E !important;
   background-color: transparent !important;
   text-transform: none;
   font-weight: 500;
+  font-family: 'Figtree', sans-serif;
 }
 
+:global(.MuiPaper-root.MuiDialog-paper) {
+  border-radius: 0 !important;
+}
+
+:global(.MuiDialogTitle-root) {
+  font-family: 'Russo One', sans-serif !important;
+  font-size: 1.75rem !important;
+  color: #00285E;
+  font-weight: normal;
+}
+
+
+/* Mobile responsive */
 @media (max-width: 768px) {
   .tableWrapper {
     overflow-x: auto;

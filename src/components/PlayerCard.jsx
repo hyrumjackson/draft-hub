@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Tooltip, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import defaultProfile from '../assets/default-profile.png';
 import styles from './styles/PlayerCard.module.css';
@@ -47,8 +47,10 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
             />
 
             <div className={styles.info}>
-              <Typography variant="h6">{player.name}</Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="h6" style={{ fontFamily: 'Russo One' }}>
+                {player.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" style={{ fontFamily: 'Figtree' }}>
                 {player.currentTeam}, {player.leagueType}
               </Typography>
 
@@ -70,7 +72,13 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
 
           {/* Right Section */}
           <div className={styles.rightSide}>
-            <div className={styles.avgRank}>
+            <div
+              className={styles.avgRank}
+              style={{
+                color: sortByScout && sortByScout !== 'Average' ? '#999' : '#00285E',
+                fontWeight: sortByScout && sortByScout !== 'Average' ? 400 : 600,
+              }}
+            >
               Avg. Rank: {player.avgRank?.toFixed(1) ?? '–'}
             </div>
 
@@ -82,27 +90,80 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
                     if (aRank !== bRank) return aRank - bRank;
                     return aName.localeCompare(bName);
                   })
-                  .sort(([nameA], [nameB]) => {
-                    // Move selected scout to the top (if it's in the list)
-                    if (!sortByScout) return 0;
-                    if (nameA === sortByScout) return -1;
-                    if (nameB === sortByScout) return 1;
-                    return 0;
-                  })
                   .map(([scout, rank]) => {
+                    const scoutRanks = Object.values(player.rankings || {});
+                    const mean =
+                      scoutRanks.reduce((sum, r) => sum + r, 0) / scoutRanks.length;
+
+                    const stdDev =
+                      Math.sqrt(
+                        scoutRanks.reduce((sum, r) => sum + Math.pow(r - mean, 2), 0) /
+                          scoutRanks.length
+                      );
+
                     const shortName = scout.split(' ')[0];
-                    let dotClass = styles.grayDot;
-                    if (rank === player.highRank) dotClass = styles.greenDot;
-                    else if (rank === player.lowRank) dotClass = styles.redDot;
-                    else dotClass = styles.neutralDot;
+
+                    let dotClass = styles.neutralDot;
+                    const z = (rank - mean) / stdDev;
+
+                    if (scoutRanks.length > 2) {
+                      if (z > 1.5) dotClass = styles.redDot;
+                      else if (z > 0.75) dotClass = styles.paleRedDot;
+                      else if (z < -1.5) dotClass = styles.greenDot;
+                      else if (z < -0.75) dotClass = styles.paleGreenDot;
+                    } else {
+                      dotClass = styles.neutralDot;
+                    }
 
                     return (
                       <div key={scout} className={styles.scoutDot}>
-                        <span className={dotClass} />
+                        <Tooltip
+                          title={
+                            scoutRanks.length <= 2
+                              ? "Too few rankings for comparison"
+                              : z > 1.5
+                              ? "Much lower than others"
+                              : z > 0.75
+                              ? "Somewhat lower than others"
+                              : z < -1.5
+                              ? "Much higher than others"
+                              : z < -0.75
+                              ? "Somewhat higher than others"
+                              : "Similar to others"
+                          }
+                          arrow
+                          placement="top"
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                fontSize: '0.9rem',
+                                padding: '0.6rem 0.9rem',
+                                color: '#fff',
+                                backgroundColor: '#00285E',
+                                borderRadius: 0,
+                                fontFamily: 'Figtree, sans-serif',
+                              },
+                            },
+                            arrow: {
+                              sx: {
+                                color: '#00285E',
+                              },
+                            },
+                          }}
+                        >
+                          <span className={dotClass} />
+                        </Tooltip>
                         <span
-                          className={`${styles.scoutText} ${
-                            sortByScout === scout ? styles.boldScout : ''
-                          }`}
+                          className={styles.scoutText}
+                          style={{
+                            fontWeight: sortByScout === scout ? 600 : 400,
+                            color:
+                              sortByScout === scout
+                                ? '#00285E'
+                                : sortByScout !== 'Average'
+                                ? '#999'
+                                : '#555'
+                          }}
                         >
                           {shortName}: {rank}
                         </span>

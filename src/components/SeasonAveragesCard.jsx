@@ -27,6 +27,13 @@ export default function SeasonAveragesCard({ seasons, fullSeasons, mode, setMode
           exclusive
           value={mode}
           onChange={(_, newMode) => newMode && setMode(newMode)}
+          sx={{
+            position: 'relative',
+            top: {
+              xs: '-0.8rem',
+              sm: '-0.4rem'
+            }
+          }}
         >
           <ToggleButton value="averages">AVG</ToggleButton>
           <ToggleButton value="totals">TOT</ToggleButton>

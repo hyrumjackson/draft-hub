@@ -4,7 +4,7 @@ import styles from './styles/BigBoard.module.css';
 import Header from './Header';
 import FilterPanel from '../components/FilterPanel';
 import PlayerCard from '../components/PlayerCard';
-import { Button, Card, CardContent } from '@mui/material';
+import { Button } from '@mui/material';
 
 export default function BigBoard() {
   const [statMode, setStatMode] = useState('Per Game');
@@ -36,7 +36,6 @@ export default function BigBoard() {
 
     const highRank = ranks.length > 0 ? Math.min(...ranks) : null;
     const lowRank = ranks.length > 0 ? Math.max(...ranks) : null;
-    const espnRank = rankingEntry?.['ESPN Rank'] ?? Infinity;
 
     const playerSeasons = seasonLogs.filter(
       (s) => s.playerId.toString() === player.playerId.toString()
@@ -64,7 +63,6 @@ export default function BigBoard() {
       avgRank,
       highRank,
       lowRank,
-      espnRank,
       stats: stats || {},
       rankings,
     };
@@ -92,7 +90,7 @@ export default function BigBoard() {
   const sortedPlayers = [...players].sort((a, b) => {
     if (sortByScout) {
       if (sortByScout === 'Average') {
-        if (a.avgRank === b.avgRank) return a.espnRank - b.espnRank;
+        if (a.avgRank === b.avgRank) return a.name.localeCompare(b.name);
         return a.avgRank - b.avgRank;
       } else {
         const aRank = a.rankings?.[sortByScout] ?? Infinity;
@@ -133,13 +131,14 @@ export default function BigBoard() {
   if (sortByScout && sortByScout !== 'Average') {
     visibleRankedPlayers = filteredPlayers.filter(p => p.rankings?.[sortByScout] != null);
     visibleUnrankedPlayers = filteredPlayers.filter(p => p.rankings?.[sortByScout] == null);
+    visibleUnrankedPlayers.sort((a, b) => a.avgRank - b.avgRank);
   } else {
     visibleRankedPlayers = filteredPlayers;
   }
 
   return (
     <div className={styles.page}>
-      <Header title="2025 NBA DRAFT HUB" subtitle="Big Board" />
+      <Header title="2025 NBA Draft Hub" subtitle="Big Board" />
 
       <div className={styles.content}>
         <div className={styles.sidebar}>
@@ -226,13 +225,9 @@ export default function BigBoard() {
 
           {/* No matches */}
           {visibleRankedPlayers.length === 0 && visibleUnrankedPlayers.length === 0 && (
-            <Card className={styles.card}>
-              <CardContent className={styles.cardContent}>
-                <div className={styles.noMatches}>
-                  No players match your search.
-                </div>
-              </CardContent>
-            </Card>
+            <div className={styles.noMatches}>
+              No players match your search.
+            </div>
           )}
         </div>
       </div>

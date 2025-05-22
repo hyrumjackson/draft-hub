@@ -1,11 +1,8 @@
-.dialogPaper {
-  padding: 1.5rem;
-}
-
 .dialogTitle {
   font-size: 1.25rem;
-  font-weight: bold;
-  color: #113259;
+  font-weight: normal;
+  color: #00285E;
+  font-family: 'Russo One', sans-serif;
   margin-bottom: 1rem;
 }
 
@@ -18,39 +15,47 @@
   margin-bottom: 1.25rem;
 }
 
+.inputFieldBottom {
+  margin-bottom: 1.25rem;
+}
+
 .inputFieldTop :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline),
 .inputFieldMiddle :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline),
 .inputFieldBottom :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
-  border-color: #113259;
+  border-color: #0053BC;
 }
 
 .inputFieldTop :global(.MuiInputLabel-root.Mui-focused),
 .inputFieldMiddle :global(.MuiInputLabel-root.Mui-focused),
 .inputFieldBottom :global(.MuiInputLabel-root.Mui-focused) {
-  color: #113259;
+  color: #0053BC;
 }
 
 .submitButton {
-  background-color: #113259 !important;
-  color: white !important;
-  font-weight: bold;
-  text-transform: none;
-  border-radius: 4px;
+  background-color: #0053BC !important;
+  color: #FFFFFF !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Figtree', sans-serif;
+  border-radius: 0;
   padding: 0.5rem 1.25rem;
+  box-shadow: none !important;
 }
 
 .cancelButton {
-  color: #444 !important;
+  color: #00285E !important;
   background-color: transparent !important;
   text-transform: none;
   font-weight: 500;
+  font-family: 'Figtree', sans-serif;
+}
+
+:global(.MuiPaper-root.MuiDialog-paper) {
+  border-radius: 0 !important;
+  font-family: 'Figtree', sans-serif;
 }
 
 @media (max-width: 768px) {
-  .dialogPaper {
-    padding: 1rem;
-  }
-
   .dialogTitle {
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
