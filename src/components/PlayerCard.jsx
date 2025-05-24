@@ -51,7 +51,7 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
                 {player.name}
               </Typography>
               <Typography variant="body2" color="text.secondary" style={{ fontFamily: 'Figtree' }}>
-                {player.currentTeam}, {player.leagueType}
+                {player.currentTeam}, {player.leagueType === 'Pro' ? player.nationality : player.leagueType}
               </Typography>
 
               <div className={styles.statsRow}>

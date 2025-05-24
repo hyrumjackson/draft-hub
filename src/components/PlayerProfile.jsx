@@ -310,7 +310,11 @@ export default function PlayerProfile() {
           </StatCard>
 
           <StatCard title="Measurements & Testing">
-            <BioMeasurementsCard player={player} measurements={playerMeasurements} />
+            <BioMeasurementsCard
+              player={player}
+              measurements={playerMeasurements}
+              allMeasurements={measurements}
+            />
           </StatCard>
 
           <ScoutingReportsCard
