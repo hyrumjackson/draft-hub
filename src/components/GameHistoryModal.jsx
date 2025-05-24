@@ -15,8 +15,23 @@ export default function GameHistoryModal({ open, onClose, games }) {
   const sortedGames = [...games].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
-      <DialogTitle>Full Game History</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      maxWidth="lg"
+      PaperProps={{ sx: { borderRadius: 0 } }}
+    >
+      <DialogTitle
+        sx={{
+          fontFamily: "'Russo One', sans-serif",
+          fontSize: '1.75rem',
+          color: '#00285E',
+          fontWeight: 'normal'
+        }}
+      >
+        Full Game History
+      </DialogTitle>
       <DialogContent dividers>
         <div className={styles.tableWrapper}>
           <table className={styles.gameTable}>

@@ -23,27 +23,6 @@
   color: #00285E;
 }
 
-:global(.MuiDivider-wrapper) {
-  font-family: 'Russo One', sans-serif !important;
-}
-
-:global(.MuiOutlinedInput-root) {
-  border-radius: 0 !important;
-  font-family: 'Figtree', sans-serif !important;
-}
-
-:global(.MuiInputLabel-root) {
-  font-family: 'Figtree', sans-serif !important;
-}
-
-:global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
-  border-color: #0053BC !important;
-}
-
-:global(.MuiInputLabel-root.Mui-focused) {
-  color: #0053BC !important;
-}
-
 .clearIcon {
   cursor: pointer;
   color: #00285E;
@@ -54,28 +33,6 @@
 
 .clearIcon:hover {
   color: #001f49;
-}
-
-:global(MuiMenuItem-root) {
-  font-family: 'Figtree', sans-serif !important;
-}
-
-:global(.MuiToggleButton-root) {
-  text-transform: none;
-  font-weight: 500;
-  font-size: 0.85rem;
-  font-family: 'Figtree', sans-serif !important;
-  border-radius: 0 !important;
-  color: #00285E;
-  border-color: #BBC4CA;
-  background-color: transparent;
-}
-
-:global(.MuiToggleButton-root.Mui-selected) {
-  background-color: #E6EEF9 !important;
-  color: #0053BC !important;
-  border-color: #0053BC !important;
-  font-weight: 600;
 }
 
 .resetButton {
@@ -90,9 +47,4 @@
 .resetButton:hover {
   border-color: #888;
   background-color: #F5F7FA;
-}
-
-:global(.MuiButtonBase-root.MuiButton-root) {
-  font-family: 'Figtree', sans-serif !important;
-  border-radius: 0 !important;
 }

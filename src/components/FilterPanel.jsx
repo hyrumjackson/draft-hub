@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ClearIcon from '@mui/icons-material/Clear';
-import styles from './styles/FilterPanel.module.css';
 
 export default function FilterPanel({
   statMode,
@@ -39,17 +38,18 @@ export default function FilterPanel({
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Divider
-        textAlign="center"
-        sx={{
-          '& span': {
+      <Divider textAlign="center">
+        <Typography
+          sx={{
             fontSize: '1.2rem',
             color: '#00285E',
-          }
-        }}
-      >
-        Search and Filters
+            fontFamily: 'Russo One, sans-serif'
+          }}
+        >
+          Search and Filters
+        </Typography>
       </Divider>
+
       <TextField
         fullWidth
         label="Search"
@@ -57,8 +57,17 @@ export default function FilterPanel({
         size="small"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        sx={{ borderRadius: '0px' }}
+        InputLabelProps={{
+          sx: {
+            fontFamily: 'Figtree, sans-serif',
+            '&.Mui-focused': { color: '#0053BC' }
+          }
+        }}
         InputProps={{
+          sx: {
+            borderRadius: 0,
+            fontFamily: 'Figtree, sans-serif'
+          },
           endAdornment: searchQuery && (
             <InputAdornment position="end">
               <IconButton onClick={() => setSearchQuery('')}>
@@ -69,17 +78,18 @@ export default function FilterPanel({
         }}
       />
 
-      <Divider
-        textAlign="left"
-        sx={{
-          '& span': {
-            fontFamily: 'Russo One',
+      <Divider textAlign="left">
+        <Typography
+          sx={{
+            fontFamily: 'Russo One, sans-serif',
             color: 'rgba(0, 0, 0, 0.6)',
-          }
-        }}
-      >
-        Sort Mode
+            fontSize: '1rem'
+          }}
+        >
+          Sort Mode
+        </Typography>
       </Divider>
+
       <ToggleButtonGroup
         color="primary"
         value={sortMode}
@@ -98,8 +108,39 @@ export default function FilterPanel({
         fullWidth
         size="small"
       >
-        <ToggleButton value="scout">Scout</ToggleButton>
-        <ToggleButton value="stat">Stat</ToggleButton>
+        <ToggleButton
+          value="scout"
+          sx={{
+            textTransform: 'none',
+            fontWeight: 500,
+            fontSize: '0.85rem',
+            fontFamily: 'Figtree, sans-serif',
+            borderRadius: 0,
+            borderColor: '#BBC4CA',
+            '&.Mui-selected': {
+              backgroundColor: '#E6EEF9',
+              color: '#0053BC',
+              borderColor: '#0053BC',
+              fontWeight: 600
+            }
+          }}
+        >
+          Scout
+        </ToggleButton>
+        <ToggleButton value="stat" sx={{
+          textTransform: 'none',
+          fontWeight: 500,
+          fontSize: '0.85rem',
+          fontFamily: 'Figtree, sans-serif',
+          borderRadius: 0,
+          borderColor: '#BBC4CA',
+          '&.Mui-selected': {
+            backgroundColor: '#E6EEF9',
+            color: '#0053BC',
+            borderColor: '#0053BC',
+            fontWeight: 600
+          }
+        }}>Stat</ToggleButton>
       </ToggleButtonGroup>
 
       {sortMode === 'scout' && (
@@ -108,16 +149,24 @@ export default function FilterPanel({
           size="small"
           value={sortByScout || 'Average'}
           onChange={(e) => setSortByScout(e.target.value)}
+          sx={{ fontFamily: 'Figtree, sans-serif', borderRadius: 0, color: '#00285E' }}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                borderRadius: 0
+              }
+            },
+            MenuListProps: {
+              sx: {
+                paddingTop: 0,
+                paddingBottom: 0
+              }
+            }
+          }}
         >
           <MenuItem value="Average" sx={{ fontFamily: 'Figtree, sans-serif' }}>Average</MenuItem>
           {availableScouts.map((scout) => (
-            <MenuItem
-              key={scout}
-              value={scout}
-              sx={{ fontFamily: 'Figtree, sans-serif' }}
-            >
-              {scout.replace(' Rank', '')}
-            </MenuItem>
+            <MenuItem key={scout} value={scout} sx={{ fontFamily: 'Figtree, sans-serif' }}>{scout.replace(' Rank', '')}</MenuItem>
           ))}
         </Select>
       )}
@@ -128,6 +177,20 @@ export default function FilterPanel({
           size="small"
           value={sortByStat || 'PTS'}
           onChange={(e) => setSortByStat(e.target.value)}
+          sx={{ fontFamily: 'Figtree, sans-serif', borderRadius: 0 }}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                borderRadius: 0
+              }
+            },
+            MenuListProps: {
+              sx: {
+                paddingTop: 0,
+                paddingBottom: 0
+              }
+            }
+          }}
         >
           <MenuItem value="PTS" sx={{ fontFamily: 'Figtree, sans-serif' }}>Points</MenuItem>
           <MenuItem value="TRB" sx={{ fontFamily: 'Figtree, sans-serif' }}>Rebounds</MenuItem>
@@ -136,17 +199,18 @@ export default function FilterPanel({
         </Select>
       )}
 
-      <Divider
-        textAlign="left"
-        sx={{
-          '& span': {
-            fontFamily: 'Russo One',
+      <Divider textAlign="left">
+        <Typography
+          sx={{
+            fontFamily: 'Russo One, sans-serif',
             color: 'rgba(0, 0, 0, 0.6)',
-          }
-        }}
-      >
-        Stat Mode
+            fontSize: '1rem'
+          }}
+        >
+          Stat Mode
+        </Typography>
       </Divider>
+
       <ToggleButtonGroup
         color="primary"
         value={statMode}
@@ -157,9 +221,22 @@ export default function FilterPanel({
         fullWidth
         size="small"
       >
-        <ToggleButton value="Per Game">Per Game</ToggleButton>
-        <ToggleButton value="Per 36">Per 36</ToggleButton>
-        <ToggleButton value="Totals">Totals</ToggleButton>
+        {['Per Game', 'Per 36', 'Totals'].map((label) => (
+          <ToggleButton key={label} value={label} sx={{
+            textTransform: 'none',
+            fontWeight: 500,
+            fontSize: '0.85rem',
+            fontFamily: 'Figtree, sans-serif',
+            borderRadius: 0,
+            borderColor: '#BBC4CA',
+            '&.Mui-selected': {
+              backgroundColor: '#E6EEF9',
+              color: '#0053BC',
+              borderColor: '#0053BC',
+              fontWeight: 600
+            }
+          }}>{label}</ToggleButton>
+        ))}
       </ToggleButtonGroup>
 
       <Button
@@ -168,7 +245,12 @@ export default function FilterPanel({
         onClick={handleReset}
         startIcon={<RestartAltIcon />}
         sx={{
+          textTransform: 'none',
+          fontWeight: 500,
+          fontFamily: 'Figtree, sans-serif',
           color: '#0053BC',
+          borderColor: '#0053BC',
+          borderRadius: 0,
         }}
       >
         Reset Filters

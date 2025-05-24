@@ -22,7 +22,6 @@ export default function SeasonAveragesCard({ seasons, fullSeasons, mode, setMode
     <div className={styles.statCard}>
       <div className={styles.cardTopRight}>
         <ToggleButtonGroup
-          className={styles.toggleGroup}
           size="small"
           exclusive
           value={mode}
@@ -32,11 +31,54 @@ export default function SeasonAveragesCard({ seasons, fullSeasons, mode, setMode
             top: {
               xs: '-0.8rem',
               sm: '-0.4rem'
-            }
+            },
+            height: '2rem'
           }}
         >
-          <ToggleButton value="averages">AVG</ToggleButton>
-          <ToggleButton value="totals">TOT</ToggleButton>
+          <ToggleButton
+            value="averages"
+            sx={{
+              textTransform: 'none',
+              fontWeight: 500,
+              fontSize: '0.85rem',
+              fontFamily: 'Figtree, sans-serif',
+              borderRadius: 0,
+              borderColor: '#BBC4CA',
+              '&.Mui-selected': {
+                backgroundColor: '#E6EEF9',
+                color: '#0053BC',
+                borderColor: '#0053BC',
+                fontWeight: 600,
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 83, 188, 0.15)' // darker than selected bg
+                }
+              }
+            }}
+          >
+            AVG
+          </ToggleButton>
+          <ToggleButton
+            value="totals"
+            sx={{
+              textTransform: 'none',
+              fontWeight: 500,
+              fontSize: '0.85rem',
+              fontFamily: 'Figtree, sans-serif',
+              borderRadius: 0,
+              borderColor: '#BBC4CA',
+              '&.Mui-selected': {
+                backgroundColor: '#E6EEF9',
+                color: '#0053BC',
+                borderColor: '#0053BC',
+                fontWeight: 600,
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 83, 188, 0.15)' // darker than selected bg
+                }
+              }
+            }}
+          >
+            TOT
+          </ToggleButton>
         </ToggleButtonGroup>
       </div>
 

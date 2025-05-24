@@ -47,7 +47,7 @@ export default function PlayerCard({ player, index, stats, statMode, ranked = tr
             />
 
             <div className={styles.info}>
-              <Typography variant="h6" style={{ fontFamily: 'Russo One' }}>
+              <Typography variant="h6" style={{ fontFamily: 'Russo One', color: '#00285E' }}>
                 {player.name}
               </Typography>
               <Typography variant="body2" color="text.secondary" style={{ fontFamily: 'Figtree' }}>

@@ -36,49 +36,157 @@ export default function ScoutingReportModal({ open, onClose, onSubmit, playerId 
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle className={styles.dialogTitle}>Create Scouting Report</DialogTitle>
-      <DialogContent>
-        <div className={styles.inputFieldTop}>
-          <TextField
-            fullWidth
-            label="Scout Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      maxWidth="sm"
+      PaperProps={{
+        sx: {
+          borderRadius: 0,
+          fontFamily: 'Figtree, sans-serif',
+        }
+      }}
+    >
+      <DialogTitle
+        sx={{
+          fontSize: '1.25rem',
+          fontWeight: 'normal',
+          color: '#00285E',
+          fontFamily: 'Russo One, sans-serif',
+        }}
+      >
+        Create Scouting Report
+      </DialogTitle>
+      <DialogContent sx={{ padding: '20px 20px 0px' }}>
+        <TextField
+          fullWidth
+          label="Scout Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          sx={{
+            mt: 1,
+            mb: 2,
+            fontFamily: 'Figtree, sans-serif',
+            '& .MuiOutlinedInput-root': {
+              fontFamily: 'Figtree, sans-serif',
+              borderRadius: 0
+            }
+          }}
+          InputLabelProps={{
+            sx: {
+              fontFamily: 'Figtree, sans-serif',
+              '&.Mui-focused': { color: '#0053BC' }
+            }
+          }}
+          InputProps={{
+            sx: {
+              fontFamily: 'Figtree, sans-serif',
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#0053BC'
+              },
+              borderRadius: 0
+            }
+          }}
+        />
 
-        <div className={styles.inputFieldMiddle}>
-          <TextField
-            fullWidth
-            label="Ranking"
-            type="number"
-            value={rank}
-            onChange={(e) => setRank(e.target.value)}
-            InputProps={{ classes: { root: styles.inputRoot } }}
-            InputLabelProps={{ className: styles.inputRoot }}
-          />
-        </div>
+        <TextField
+          fullWidth
+          label="Ranking"
+          type="number"
+          value={rank}
+          onChange={(e) => setRank(e.target.value)}
+          sx={{
+            mb: 2,
+            fontFamily: 'Figtree, sans-serif',
+            '& .MuiOutlinedInput-root': {
+              fontFamily: 'Figtree, sans-serif',
+              borderRadius: 0
+            }
+          }}
+          InputLabelProps={{
+            sx: {
+              fontFamily: 'Figtree, sans-serif',
+              '&.Mui-focused': { color: '#0053BC' }
+            }
+          }}
+          InputProps={{
+            sx: {
+              fontFamily: 'Figtree, sans-serif',
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#0053BC'
+              },
+              borderRadius: 0
+            }
+          }}
+        />
 
-        <div className={styles.inputFieldBottom}>
-          <TextField
-            fullWidth
-            multiline
-            label="Scouting Report"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            rows={4}
-          />
-        </div>
+
+        <TextField
+          fullWidth
+          multiline
+          label="Scouting Report"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          rows={4}
+          sx={{
+            mb: 2,
+            fontFamily: 'Figtree, sans-serif',
+            '& .MuiOutlinedInput-root': {
+              fontFamily: 'Figtree, sans-serif',
+              borderRadius: 0
+            }
+          }}
+          InputLabelProps={{
+            sx: {
+              fontFamily: 'Figtree, sans-serif',
+              '&.Mui-focused': { color: '#0053BC' }
+            }
+          }}
+          InputProps={{
+            sx: {
+              fontFamily: 'Figtree, sans-serif',
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#0053BC'
+              },
+              borderRadius: 0
+            }
+          }}
+        />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} className={styles.cancelButton}>
+        <Button
+          onClick={onClose}
+          sx={{
+            color: '#00285E',
+            backgroundColor: 'transparent',
+            textTransform: 'none',
+            fontWeight: 500,
+            fontFamily: 'Figtree, sans-serif',
+            width: { xs: '100%', sm: 'auto' },
+            justifyContent: { xs: 'center', sm: 'flex-start' }
+          }}
+        >
           Cancel
         </Button>
         <Button
           variant="contained"
           onClick={handleSubmit}
-          className={styles.submitButton}
+          sx={{
+            backgroundColor: '#0053BC',
+            color: '#FFFFFF',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            fontFamily: 'Figtree, sans-serif',
+            borderRadius: 0,
+            padding: '0.5rem 1.25rem',
+            boxShadow: 'none',
+            width: { xs: '100%', sm: 'auto' },
+            justifyContent: { xs: 'center', sm: 'flex-start' },
+            '&:hover': {
+              backgroundColor: '#00285E'
+            }
+          }}
         >
           Submit
         </Button>

@@ -23,8 +23,23 @@ export default function SeasonAveragesModal({ open, onClose, seasons }) {
   ];
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
-      <DialogTitle>All Season Stats</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      maxWidth="lg"
+      PaperProps={{ sx: { borderRadius: 0 } }}
+    >
+      <DialogTitle
+        sx={{
+          fontFamily: "'Russo One', sans-serif",
+          fontSize: '1.75rem',
+          color: '#00285E',
+          fontWeight: 'normal'
+        }}
+      >
+        All Season Stats
+      </DialogTitle>
       <DialogContent dividers>
         <div className={styles.tableWrapper}>
           <table className={styles.gameTable}>

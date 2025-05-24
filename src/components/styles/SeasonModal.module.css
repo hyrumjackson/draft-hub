@@ -64,18 +64,6 @@
   font-family: 'Figtree', sans-serif;
 }
 
-:global(.MuiPaper-root.MuiDialog-paper) {
-  border-radius: 0 !important;
-}
-
-:global(.MuiDialogTitle-root) {
-  font-family: 'Russo One', sans-serif !important;
-  font-size: 1.75rem !important;
-  color: #00285E;
-  font-weight: normal;
-}
-
-
 /* Mobile responsive */
 @media (max-width: 768px) {
   .tableWrapper {
