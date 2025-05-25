@@ -179,16 +179,22 @@
   margin-left: 0.25rem;
 }
 
-.strongIcon {
-  color: #2e7d32;
-  font-size: 1.2rem;
-  margin-left: 0.25rem;
+.greenDot {
+  background-color: #2ecc71;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 0.4rem;
 }
 
-.weakIcon {
-  color: #c62828;
-  font-size: 1.2rem;
-  margin-left: 0.25rem;
+.redDot {
+  background-color: #e74c3c;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 0.4rem;
 }
 
 /* Mobile friendly styles */

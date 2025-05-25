@@ -54,36 +54,7 @@ export default function BioMeasurementsCard({ player, measurements, allMeasureme
       );
     }
 
-    if (!invert && value > top25) {
-      return (
-        <Tooltip
-          title="Top 25%"
-          arrow
-          placement="top"
-          componentsProps={{
-            tooltip: {
-              sx: {
-                fontSize: '0.85rem',
-                padding: '0.5rem 0.75rem',
-                color: '#fff',
-                backgroundColor: '#00285E',
-                borderRadius: 0,
-                fontFamily: 'Figtree, sans-serif',
-              },
-            },
-            arrow: {
-              sx: {
-                color: '#00285E',
-              },
-            },
-          }}
-        >
-          <span className={styles.strongIcon}>▲</span>
-        </Tooltip>
-      );
-    }
-
-    if (!invert && value < bottom25) {
+    if ((!invert && value < bottom25) || (invert && value > top25)) {
       return (
         <Tooltip
           title="Bottom 25%"
@@ -107,12 +78,12 @@ export default function BioMeasurementsCard({ player, measurements, allMeasureme
             },
           }}
         >
-          <span className={styles.weakIcon}>▼</span>
+          <span className={styles.redDot} />
         </Tooltip>
       );
     }
 
-    if (invert && value < bottom25) {
+    if ((!invert && value > top25) || (invert && value < bottom25)) {
       return (
         <Tooltip
           title="Top 25%"
@@ -136,36 +107,7 @@ export default function BioMeasurementsCard({ player, measurements, allMeasureme
             },
           }}
         >
-          <span className={styles.strongIcon}>▲</span>
-        </Tooltip>
-      );
-    }
-
-    if (invert && value > top25) {
-      return (
-        <Tooltip
-          title="Bottom 25%"
-          arrow
-          placement="top"
-          componentsProps={{
-            tooltip: {
-              sx: {
-                fontSize: '0.85rem',
-                padding: '0.5rem 0.75rem',
-                color: '#fff',
-                backgroundColor: '#00285E',
-                borderRadius: 0,
-                fontFamily: 'Figtree, sans-serif',
-              },
-            },
-            arrow: {
-              sx: {
-                color: '#00285E',
-              },
-            },
-          }}
-        >
-          <span className={styles.weakIcon}>▼</span>
+          <span className={styles.greenDot} />
         </Tooltip>
       );
     }
