@@ -71,4 +71,4 @@ Tooltips explain each dot if you hover.
 
 ## Notes for Reviewers
 
-Thanks for checking this out! The prompt was super open-ended, so I focused on clean design and clarity, making it easy for scouts and execs to glance through the big board, identify outliers, and dig deeper into prospects who stand out.
+Thanks for checking this out! I focused on clean design and clarity, making it easy for scouts and execs to glance through the big board, identify outliers, and dig deeper into prospects who stand out.
