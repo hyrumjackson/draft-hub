@@ -1,108 +1,74 @@
-# 🏀 NBA Draft Hub – Mavericks Front Office Scouting Tool
+# 🏀 NBA Draft Hub
 
-This project is a data-driven React application designed to support front office decision-makers during the 2025 NBA Draft. The goal was to create a user-friendly, insightful Draft Hub using the provided JSON dataset — treating the rankings as if they were from Mavericks scouts.
+This is a React app built for the Mavericks front office to use during the NBA Draft. It takes in a dataset of prospects and gives decision-makers a clean, interactive interface to evaluate players, compare scout rankings, and add their own notes.
 
-### 🚀 Live Demo
-**Netlify:** [Insert Your Netlify Link Here]  
-**GitHub Repo:** [Insert GitHub Repository Link Here]
-
----
-
-## 📋 Features
-
-### ✅ Big Board
-- Displays all prospects in order based on average scout ranking.
-- Real-time search across name, team, or league.
-- Scout dots with tooltips show how high or low each scout is on a player (based on z-score).
-
-### ✅ Player Profiles
-- Click any player to view full profile.
-- Includes:
-  - Headshot, bio, team & league
-  - Scout Rankings (with outlier color indicators)
-  - Season averages toggle (Per Game / Totals / Per 36)
-  - Game history and testing data
-  - Measurements & Athletic Testing with percentile indicators
-
-### ✅ Scouting Reports
-- Create a custom report for any player using a simple form.
-- Reports are saved in `useState` (non-persistent by design).
-- Custom reports are integrated alongside official scout rankings.
+### 🌐 Links
+- **Live App (Netlify):** https://stately-maamoul-24e6bb.netlify.app/
+- **GitHub Repo:** https://github.com/hyrumjackson/draft-hub
 
 ---
 
-## 💻 Technology
+## 🧠 What It Does
 
-- **React + Vite** (Frontend framework)
-- **Material UI (MUI)** – for components like `Tooltip`, `ButtonGroup`, `TextField`, etc.
-- **Responsive Design** – optimized for laptops, still viewable on tablets/phones.
-- **Data-Driven** – no hardcoding, entirely powered by the JSON file.
+- **Big Board** showing all players in order of average scout rank
+- Click on any player to open a **profile** with:
+  - Bio, team, nationality, and a headshot
+  - A full list of scout rankings with color-coded dots
+  - Athletic testing & combine measurements
+  - Season stats with a toggle (per game / totals / per 36)
+  - Game history
+  - A form to add your own custom scouting report (saved in local state)
 
----
-
-## 🧠 Design Highlights
-
-### 🎯 Scout Ranking Indicators
-Scout evaluations are visualized using color-coded dots:
-- 🟢 Green = Top 10% (significantly higher than average)
-- 🔴 Red = Bottom 10% (significantly lower)
-- 🟡 Pale = mild deviations
-- ⚪ Gray = no significant deviation
-
-Tooltips explain each scout’s rank position and relation to the average.
-
-### 🏃‍♂️ Athletic Testing Icons
-Athletic stats (sprint, shuttle, vertical, etc.) feature:
-- ⭐ Star for top 10% (elite)
-- 🟢 Green Dot = Top 25%
-- 🔴 Red Dot = Bottom 25%
-
-All tiers calculated from the full dataset and rendered inline with tooltips.
-
-### 🔄 Season Stat Toggle
-A toggle at the top of the profile allows users to switch between:
-- Per Game
-- Totals
-- Per 36 Minutes
+The whole app is data-driven — nothing is hardcoded — so it works no matter what players are in the dataset.
 
 ---
 
-## 🧪 Data Strategy
+## 🧮 How the Dots Work
 
-The app uses the provided `intern_project_data.json`, broken into:
-- `bio`: Player personal info
-- `scoutRankings`: Publicly sourced scout rankings
-- `seasonLogs`: Player season averages
-- `gameLogs`: Game-level performance
-- `measurements`: Combine results and testing
-- `scoutingReports`: User-entered reports
+### 🟢 Scout Ranking Dots
+Each scout’s ranking is compared to the average using a **z-score**:
 
-The app reads this data as if it were from an API — fully abstracted and dynamic.
+- **🟢 Green dot** = Much higher than average  
+- **🟢 Pale green dot** = Slightly higher than average  
+- **🔴 Pale red dot** = Slightly lower than average  
+- **🔴 Red dot** = Much lower than average  
+- **⚪ Gray dot** = Similar to others or not enough data  
+
+### 🏃 Athletic Testing Dots
+Athletic stats like sprint time and vertical jump are compared to all players using percentiles:
+
+- **⭐ Star** = Top 10% (Elite)
+- **🟢 Green dot** = Top 25%
+- **🔴 Red dot** = Bottom 25%
+
+Tooltips explain each dot if you hover.
+
+---
+
+## 🛠 Tech Stack
+
+- **React + Vite** (frontend framework)
+- **Material UI** for components like tooltips and text fields
+- **Plain JavaScript** and `useState` for managing scouting reports
+- **Responsive CSS** (works best on laptop, still readable on tablet/phone)
 
 ---
 
 ## ✅ Requirements Checklist
 
-| Requirement                                      | Completed |
-|--------------------------------------------------|-----------|
-| React + Vite                                     | ✅        |
-| No backend / JSON only                           | ✅        |
-| Uses Material UI                                 | ✅        |
-| At least one dynamic input                       | ✅ (stat toggle) |
-| Form to add scouting reports (useState)          | ✅        |
-| Fully data-driven and non-hardcoded              | ✅        |
-| Responsive layout                                | ✅        |
-| Hosted on Netlify                                | ✅        |
+| Feature                                                   | Done |
+|-----------------------------------------------------------|------|
+| React app built with Vite                                 | ✅   |
+| Uses Material UI components                               | ✅   |
+| Data-driven using a JSON file, no backend needed          | ✅   |
+| Allows input that changes the view (stat mode toggle)     | ✅   |
+| Form for adding new scouting reports (saved in `useState`) | ✅   |
+| Fully dynamic, nothing hardcoded                          | ✅   |
+| Works on different screen sizes                           | ✅   |
+| Deployed on Netlify                                       | ✅   |
 
 ---
 
-## 🗒️ Notes to Reviewers
+## 🗒️ Notes for Reviewers
 
-This app was designed with real scouts in mind. From percentile-based indicators to dynamic report creation, every element focuses on giving decision-makers clarity at a glance while respecting the constraints of a frontend-only environment.
-
-Let me know if you'd like to see more features like:
-- Save reports to local storage
-- Draft simulator based on rankings
-- Player comparisons side-by-side
-
-Thanks for the opportunity!
+Thanks for checking this out! The prompt was super open-ended, so I focused on clean design and clarity — making it easy for scouts and execs to glance through the big board, identify outliers, and dig deeper into prospects who stand out.
