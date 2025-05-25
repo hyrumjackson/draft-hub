@@ -19,7 +19,7 @@ This is a React app built for the Mavericks front office to use during the NBA D
   - Game history
   - A form to add your own custom scouting report (saved in local state)
 
-The whole app is data-driven — nothing is hardcoded — so it works no matter what players are in the dataset.
+The whole app is data-driven, so it works no matter what players are in the dataset.
 
 ---
 
@@ -71,4 +71,4 @@ Tooltips explain each dot if you hover.
 
 ## Notes for Reviewers
 
-Thanks for checking this out! The prompt was super open-ended, so I focused on clean design and clarity — making it easy for scouts and execs to glance through the big board, identify outliers, and dig deeper into prospects who stand out.
+Thanks for checking this out! The prompt was super open-ended, so I focused on clean design and clarity, making it easy for scouts and execs to glance through the big board, identify outliers, and dig deeper into prospects who stand out.
