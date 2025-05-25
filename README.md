@@ -1,14 +1,14 @@
-# 🏀 NBA Draft Hub
+# NBA Draft Hub
 
 This is a React app built for the Mavericks front office to use during the NBA Draft. It takes in a dataset of prospects and gives decision-makers a clean, interactive interface to evaluate players, compare scout rankings, and add their own notes.
 
-### 🌐 Links
+### Links
 - **Live App (Netlify):** https://stately-maamoul-24e6bb.netlify.app/
 - **GitHub Repo:** https://github.com/hyrumjackson/draft-hub
 
 ---
 
-## 🧠 What It Does
+## What It Does
 
 - **Big Board** showing all players in order of average scout rank
 - Click on any player to open a **profile** with:
@@ -23,9 +23,9 @@ The whole app is data-driven — nothing is hardcoded — so it works no matter 
 
 ---
 
-## 🧮 How the Dots Work
+## How the Dots Work
 
-### 🟢 Scout Ranking Dots
+### Scout Ranking Dots
 Each scout’s ranking is compared to the average using a **z-score**:
 
 - **🟢 Green dot** = Much higher than average  
@@ -34,7 +34,7 @@ Each scout’s ranking is compared to the average using a **z-score**:
 - **🔴 Red dot** = Much lower than average  
 - **⚪ Gray dot** = Similar to others or not enough data  
 
-### 🏃 Athletic Testing Dots
+### Athletic Testing Dots
 Athletic stats like sprint time and vertical jump are compared to all players using percentiles:
 
 - **⭐ Star** = Top 10% (Elite)
@@ -45,7 +45,7 @@ Tooltips explain each dot if you hover.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **React + Vite** (frontend framework)
 - **Material UI** for components like tooltips and text fields
@@ -54,7 +54,7 @@ Tooltips explain each dot if you hover.
 
 ---
 
-## ✅ Requirements Checklist
+## Requirements Checklist
 
 | Feature                                                   | Done |
 |-----------------------------------------------------------|------|
@@ -69,6 +69,6 @@ Tooltips explain each dot if you hover.
 
 ---
 
-## 🗒️ Notes for Reviewers
+## Notes for Reviewers
 
 Thanks for checking this out! The prompt was super open-ended, so I focused on clean design and clarity — making it easy for scouts and execs to glance through the big board, identify outliers, and dig deeper into prospects who stand out.
